@@ -1,0 +1,4 @@
+analysis_app/
+checkpoints/
+recog_algorithms/
+*.pth
