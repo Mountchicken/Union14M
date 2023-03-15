@@ -1,4 +1,4 @@
-train_root = 'data/Union14M-L/'
+train_root = '../data/Union14M-L/'
 
 challenging = dict(
     type='OCRDataset',

@@ -1,4 +1,4 @@
-test_root = 'data/Union14M-L/Union14M-Benchmarks'
+test_root = '../data/Union14M-L/Union14M-Benchmarks'
 
 test_img_prefix1 = f'{test_root}/artistic'
 test_img_prefix2 = f'{test_root}/contextless'
