@@ -12,7 +12,7 @@ from .base_decoder import BaseDecoder
 
 
 @DECODERS.register_module()
-class UniRecDecoder(BaseDecoder):
+class MAERecDecoder(BaseDecoder):
     """Transformer Decoder block with self attention mechanism.
 
     Args:

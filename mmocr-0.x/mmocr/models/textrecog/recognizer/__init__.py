@@ -9,9 +9,9 @@ from .robust_scanner import RobustScanner
 from .sar import SARNet
 from .satrn import SATRN
 from .seg_recognizer import SegRecognizer
-from .unirec import UniRec
+from .maerec import MAERec
 
 __all__ = [
     'BaseRecognizer', 'EncodeDecodeRecognizer', 'CRNNNet', 'SARNet', 'NRTR',
-    'SegRecognizer', 'RobustScanner', 'SATRN', 'ABINet', 'MASTER', 'UniRec'
+    'SegRecognizer', 'RobustScanner', 'SATRN', 'ABINet', 'MASTER', 'MAERec'
 ]

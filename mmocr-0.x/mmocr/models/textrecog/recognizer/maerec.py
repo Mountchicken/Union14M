@@ -5,5 +5,5 @@ from .encode_decode_recognizer import EncodeDecodeRecognizer
 
 
 @RECOGNIZERS.register_module()
-class UniRec(EncodeDecodeRecognizer):
+class MAERec(EncodeDecodeRecognizer):
     """ViT based recognizer"""

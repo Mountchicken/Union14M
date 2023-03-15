@@ -1,12 +1,9 @@
-train_root = '../Union4M/Union4M/training_sets'
-
-train_img_prefix1 = train_root
-train_ann_file1 = f'{train_root}/hell.jsonl'
+train_root = 'data/Union14M-L/'
 
 challenging = dict(
     type='OCRDataset',
-    img_prefix=train_img_prefix1,
-    ann_file=train_ann_file1,
+    img_prefix=train_root,
+    ann_file=f'{train_root}/train_challenging.jsonl',
     loader=dict(
         type='AnnFileLoader',
         repeat=1,
@@ -14,14 +11,11 @@ challenging = dict(
         parser=dict(type='LineJsonParser', keys=['filename', 'text'])),
     pipeline=None,
     test_mode=False)
-
-train_img_prefix2 = train_root
-train_ann_file2 = f'{train_root}/hard.jsonl'
 
 hard = dict(
     type='OCRDataset',
-    img_prefix=train_img_prefix2,
-    ann_file=train_ann_file2,
+    img_prefix=train_root,
+    ann_file=f'{train_root}/train_hard.jsonl',
     loader=dict(
         type='AnnFileLoader',
         repeat=1,
@@ -29,14 +23,11 @@ hard = dict(
         parser=dict(type='LineJsonParser', keys=['filename', 'text'])),
     pipeline=None,
     test_mode=False)
-
-train_img_prefix3 = train_root
-train_ann_file3 = f'{train_root}/difficult.jsonl'
 
 medium = dict(
     type='OCRDataset',
-    img_prefix=train_img_prefix3,
-    ann_file=train_ann_file3,
+    img_prefix=train_root,
+    ann_file=f'{train_root}/train_medium.jsonl',
     loader=dict(
         type='AnnFileLoader',
         repeat=1,
@@ -44,14 +35,11 @@ medium = dict(
         parser=dict(type='LineJsonParser', keys=['filename', 'text'])),
     pipeline=None,
     test_mode=False)
-
-train_img_prefix4 = train_root
-train_ann_file4 = f'{train_root}/medium.jsonl'
 
 normal = dict(
     type='OCRDataset',
-    img_prefix=train_img_prefix4,
-    ann_file=train_ann_file4,
+    img_prefix=train_root,
+    ann_file=f'{train_root}/val_annos.jsonl',
     loader=dict(
         type='AnnFileLoader',
         repeat=1,
@@ -60,13 +48,22 @@ normal = dict(
     pipeline=None,
     test_mode=False)
 
-train_img_prefix5 = train_root
-train_ann_file5 = f'{train_root}/simple.jsonl'
-
 easy = dict(
     type='OCRDataset',
-    img_prefix=train_img_prefix5,
-    ann_file=train_ann_file5,
+    img_prefix=train_root,
+    ann_file=f'{train_root}/train_easy.jsonl',
+    loader=dict(
+        type='AnnFileLoader',
+        repeat=1,
+        file_format='txt',
+        parser=dict(type='LineJsonParser', keys=['filename', 'text'])),
+    pipeline=None,
+    test_mode=False)
+
+val = dict(
+    type='OCRDataset',
+    img_prefix=train_root,
+    ann_file=f'{train_root}/train_easy.jsonl',
     loader=dict(
         type='AnnFileLoader',
         repeat=1,
@@ -76,3 +73,4 @@ easy = dict(
     test_mode=False)
 
 train_list = [challenging, hard, medium, normal, easy]
+val_list = [val]
