@@ -1,9 +1,3 @@
-# Copyright (c) Meta Platforms, Inc. and affiliates.
-# All rights reserved.
-
-# This source code is licensed under the license found in the
-# LICENSE file in the root directory of this source tree.
-# --------------------------------------------------------
 # References:
 # MAE: https://github.com/facebookresearch/mae
 # --------------------------------------------------------
@@ -12,9 +6,9 @@ import sys
 from typing import Iterable
 
 import torch
+
 import util.lr_sched as lr_sched
 import util.misc as misc
-
 from visualize import visualize_tensor
 
 
@@ -25,6 +19,7 @@ def train_one_epoch(model: torch.nn.Module,
                     epoch: int,
                     loss_scaler,
                     log_writer=None,
+                    log_freq=200,
                     args=None):
     model.train(True)
     metric_logger = misc.MetricLogger(delimiter="  ")
@@ -86,10 +81,9 @@ def train_one_epoch(model: torch.nn.Module,
             log_writer.add_scalar('train_loss', loss_value_reduce, epoch_1000x)
             log_writer.add_scalar('lr', lr, epoch_1000x)
         # Visualize
-        visualize_step = 200
-        if log_writer is not None and (data_iter_step +
-                                       1) % visualize_step == 0:
-            vis_tensor = visualize_tensor(imgs, reconstruction, mask)
+        if log_writer is not None and (data_iter_step + 1) % log_freq == 0:
+            vis_tensor = visualize_tensor(
+                imgs, reconstruction, mask, patch_size=model.patch_size)
             log_writer.add_image('train_vis', vis_tensor, epoch_1000x)
     # gather the stats from all processes
     metric_logger.synchronize_between_processes()

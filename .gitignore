@@ -3,3 +3,5 @@ checkpoints/
 recog_algorithms/
 *.pth
 data/
+baselines/
+dataset_funcs/

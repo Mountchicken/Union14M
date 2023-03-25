@@ -1,9 +1,3 @@
-# Copyright (c) Meta Platforms, Inc. and affiliates.
-# All rights reserved.
-
-# This source code is licensed under the license found in the
-# LICENSE file in the root directory of this source tree.
-# --------------------------------------------------------
 # References:
 # MAE: https://github.com/facebookresearch/mae
 # --------------------------------------------------------
@@ -13,6 +7,7 @@ from functools import partial
 import torch
 import torch.nn as nn
 from timm.models.vision_transformer import Block, PatchEmbed
+
 from util.pos_embed import get_2d_sincos_pos_embed
 
 
@@ -21,12 +16,12 @@ class MaskedAutoencoderViT(nn.Module):
     """
 
     def __init__(self,
-                 img_size=224,
-                 patch_size=16,
+                 img_size=(32, 128),
+                 patch_size=4,
                  in_chans=3,
-                 embed_dim=1024,
-                 depth=24,
-                 num_heads=16,
+                 embed_dim=768,
+                 depth=12,
+                 num_heads=12,
                  decoder_embed_dim=512,
                  decoder_depth=8,
                  decoder_num_heads=16,
@@ -40,7 +35,8 @@ class MaskedAutoencoderViT(nn.Module):
         self.patch_embed = PatchEmbed(img_size, patch_size, in_chans,
                                       embed_dim)
         num_patches = self.patch_embed.num_patches
-
+        self.patch_size = patch_size
+        self.img_size = img_size
         self.cls_token = nn.Parameter(torch.zeros(1, 1, embed_dim))
         self.pos_embed = nn.Parameter(
             torch.zeros(1, num_patches + 1, embed_dim),
@@ -109,8 +105,7 @@ class MaskedAutoencoderViT(nn.Module):
         w = self.patch_embed.proj.weight.data
         torch.nn.init.xavier_uniform_(w.view([w.shape[0], -1]))
 
-        # timm's trunc_normal_(std=.02) is effectively normal_(std=0.02)
-        # as cutoff is too big (2.)
+        # timm's trunc_normal_(std=.02) is effectively normal_(std=0.02) as cutoff is too big (2.) # noqa
         torch.nn.init.normal_(self.cls_token, std=.02)
         torch.nn.init.normal_(self.mask_token, std=.02)
 
@@ -147,9 +142,9 @@ class MaskedAutoencoderViT(nn.Module):
         x: (N, L, patch_size**2 *3)
         imgs: (N, 3, H, W)
         """
-        p = 8
-        h = 32 // 8
-        w = 128 // 8
+        p = self.patch_size
+        h = self.img_size[0] // p
+        w = self.img_size[1] // p
         x = x.reshape(shape=(x.shape[0], h, w, p, p, 3))
         x = torch.einsum('nhwpqc->nchpwq', x)
         imgs = x.reshape(shape=(x.shape[0], 3, h * p, w * p))
@@ -186,14 +181,14 @@ class MaskedAutoencoderViT(nn.Module):
 
     def forward_encoder(self, x, mask_ratio):
         # embed patches
-        x = self.patch_embed(x)  # [B, 3, 32, 128] -> [B, 64, 384]
+        x = self.patch_embed(x)
 
         # add pos embed w/o cls token
         x = x + self.pos_embed[:, 1:, :]
 
         # masking: length -> length * mask_ratio
         x, mask, ids_restore = self.random_masking(x, mask_ratio)
-        # x.shape -> [B, 64*(1-mask_ratio), 384]
+
         # append cls token
         cls_token = self.cls_token + self.pos_embed[:, :1, :]
         cls_tokens = cls_token.expand(x.shape[0], -1, -1)
@@ -208,7 +203,7 @@ class MaskedAutoencoderViT(nn.Module):
 
     def forward_decoder(self, x, ids_restore):
         # embed tokens
-        x = self.decoder_embed(x)  # [B, 17, 384] -> [B, 17, 512]
+        x = self.decoder_embed(x)
 
         # append mask tokens to sequence
         mask_tokens = self.mask_token.repeat(
@@ -220,7 +215,7 @@ class MaskedAutoencoderViT(nn.Module):
             index=ids_restore.unsqueeze(-1).repeat(1, 1,
                                                    x.shape[2]))  # unshuffle
         x = torch.cat([x[:, :1, :], x_], dim=1)  # append cls token
-        # [B, 17, 512] -> [B, 65, 512]
+
         # add pos embed
         x = x + self.decoder_pos_embed
 
@@ -294,55 +289,6 @@ def mae_vit_base_patch4_dec512d8b(**kwargs):
     return model
 
 
-def mae_vit_base_patch16_dec512d8b(**kwargs):
-    model = MaskedAutoencoderViT(
-        patch_size=16,
-        embed_dim=768,
-        depth=12,
-        num_heads=12,
-        decoder_embed_dim=512,
-        decoder_depth=8,
-        decoder_num_heads=16,
-        mlp_ratio=4,
-        norm_layer=partial(nn.LayerNorm, eps=1e-6),
-        **kwargs)
-    return model
-
-
-def mae_vit_large_patch16_dec512d8b(**kwargs):
-    model = MaskedAutoencoderViT(
-        patch_size=16,
-        embed_dim=1024,
-        depth=24,
-        num_heads=16,
-        decoder_embed_dim=512,
-        decoder_depth=8,
-        decoder_num_heads=16,
-        mlp_ratio=4,
-        norm_layer=partial(nn.LayerNorm, eps=1e-6),
-        **kwargs)
-    return model
-
-
-def mae_vit_huge_patch14_dec512d8b(**kwargs):
-    model = MaskedAutoencoderViT(
-        patch_size=14,
-        embed_dim=1280,
-        depth=32,
-        num_heads=16,
-        decoder_embed_dim=512,
-        decoder_depth=8,
-        decoder_num_heads=16,
-        mlp_ratio=4,
-        norm_layer=partial(nn.LayerNorm, eps=1e-6),
-        **kwargs)
-    return model
-
-
 # set recommended archs
-
-mae_vit_small_patch4 = mae_vit_small_patch4_dec512d8b
-mae_vit_base_patch4 = mae_vit_base_patch4_dec512d8b
-mae_vit_base_patch16 = mae_vit_base_patch16_dec512d8b
-mae_vit_large_patch16 = mae_vit_large_patch16_dec512d8b
-mae_vit_huge_patch14 = mae_vit_huge_patch14_dec512d8b
+mae_vit_small_patch4 = mae_vit_small_patch4_dec512d8b  # decoder: 512 dim, 8 blocks # noqa
+mae_vit_base_patch4 = mae_vit_base_patch4_dec512d8b  # decoder: 512 dim, 8 blocks # noqa

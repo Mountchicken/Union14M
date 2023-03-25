@@ -1,9 +1,3 @@
-# Copyright (c) Meta Platforms, Inc. and affiliates.
-# All rights reserved.
-
-# This source code is licensed under the license found in the
-# LICENSE file in the root directory of this source tree.
-# --------------------------------------------------------
 # References:
 # MAE: https://github.com/facebookresearch/mae
 # --------------------------------------------------------
@@ -14,7 +8,6 @@ import os
 import time
 from pathlib import Path
 
-import models_mae
 import numpy as np
 import timm
 import timm.optim.optim_factory as optim_factory
@@ -22,9 +15,11 @@ import torch
 import torch.backends.cudnn as cudnn
 import torchvision.datasets as datasets
 import torchvision.transforms as transforms
+from torch.utils.tensorboard import SummaryWriter
+
+import models_mae
 import util.misc as misc
 from engine_pretrain import train_one_epoch
-from torch.utils.tensorboard import SummaryWriter
 from util.misc import NativeScalerWithGradNormCount as NativeScaler
 
 assert timm.__version__ == "0.3.2"  # version check
@@ -36,26 +31,29 @@ def get_args_parser():
         '--batch_size',
         default=64,
         type=int,
-        help='Batch size per GPU'
-        '(effective batch size is batch_size * accum_iter * # gpus')
+        help=
+        'Batch size per GPU (effective batch size is batch_size * accum_iter * # gpus)'  # noqa
+    )
     parser.add_argument('--epochs', default=20, type=int)
     parser.add_argument(
         '--accum_iter',
-        default=2,
+        default=1,
         type=int,
-        help='Accumulate gradient iterations (for increasing the effective '
-        'batch size under memory constraints)')
-
+        help=
+        'Accumulate gradient iterations (for increasing the effective batch size under memory constraints)'  # noqa
+    )
+    parser.add_argument(
+        '--log_freq',
+        default=200,
+        type=int,
+        help='Log frequency for tensorboard (default: 200)')
     # Model parameters
     parser.add_argument(
         '--model',
-        default='mae_vit_large_patch16',
+        default='mae_vit_base_patch4',
         type=str,
         metavar='MODEL',
         help='Name of model to train')
-
-    parser.add_argument(
-        '--input_size', default=224, type=int, help='images input size')
 
     parser.add_argument(
         '--mask_ratio',
@@ -75,7 +73,6 @@ def get_args_parser():
         type=float,
         default=0.05,
         help='weight decay (default: 0.05)')
-
     parser.add_argument(
         '--lr',
         type=float,
@@ -87,19 +84,18 @@ def get_args_parser():
         type=float,
         default=1e-3,
         metavar='LR',
-        help='base learning rate: '
-        'absolute_lr = base_lr * total_batch_size / 256')
+        help=
+        'base learning rate: absolute_lr = base_lr * total_batch_size / 256')
     parser.add_argument(
         '--min_lr',
         type=float,
         default=0.,
         metavar='LR',
         help='lower lr bound for cyclic schedulers that hit 0')
-
     parser.add_argument(
         '--warmup_epochs',
         type=int,
-        default=40,
+        default=2,
         metavar='N',
         help='epochs to warmup LR')
 
@@ -132,8 +128,9 @@ def get_args_parser():
     parser.add_argument(
         '--pin_mem',
         action='store_true',
-        help='Pin CPU memory in DataLoader '
-        'for more efficient (sometimes) transfer to GPU.')
+        help=
+        'Pin CPU memory in DataLoader for more efficient (sometimes) transfer to GPU.'  # noqa
+    )
     parser.add_argument('--no_pin_mem', action='store_false', dest='pin_mem')
     parser.set_defaults(pin_mem=True)
 
@@ -168,13 +165,13 @@ def main(args):
 
     cudnn.benchmark = True
 
-    # For text recognition, we don't need much data augmentation
+    # simple augmentation
     transform_train = transforms.Compose([
-        transforms.Resize((32, 128), interpolation=3),  # 3 is bicubic
+        transforms.Resize((32, 128), interpolation=3),
         transforms.ToTensor(),
-        transforms.Normalize(
-            mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
+        transforms.Normalize(mean=[0.5, 0.5, 0.5], std=[0.5, 0.5, 0.5])
     ])
+
     if isinstance(args.data_path, list):
         dataset_train = datasets.ImageFolder(args.data_path[0],
                                              transform_train)
@@ -235,7 +232,7 @@ def main(args):
 
     if args.distributed:
         model = torch.nn.parallel.DistributedDataParallel(
-            model, device_ids=[args.gpu], find_unused_parameters=True)
+            model, device_ids=[args.gpu], find_unused_parameters=False)
         model_without_ddp = model.module
 
     # following timm: set wd as 0 for bias and norm layers
@@ -264,8 +261,9 @@ def main(args):
             epoch,
             loss_scaler,
             log_writer=log_writer,
+            log_freq=args.log_freq,
             args=args)
-        if args.output_dir and (epoch % 4 == 0 or epoch + 1 == args.epochs):
+        if args.output_dir:
             misc.save_model(
                 args=args,
                 model=model,

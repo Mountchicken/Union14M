@@ -8,12 +8,15 @@
 </div>
 <p align="center">
    <strong><a href="#sota">arXiv </a></strong> •
-   <strong><a href="./papers.md">download </a></strong> •
-   <strong><a href="./datasets.md">pre-training </a></strong> •
-   <strong><a href="#code">fine-tuning</a></strong>
+   <strong><a href="#1-introduction">Introduction </a></strong> •
+   <strong><a href="#34-download">Download </a></strong> •
+   <strong><a href="#4-maerec">MAERec</a></strong> •
+   <strong><a href="#MAERec">QAs</a></strong>
+   
 </p>
 
 ## 1. Introduction
+
 - Scene Text Recognition (STR) is a fundamental task in computer vision, which aims to recognize the text in natural images. STR has been developed rapidly in recent years, and recent state-of-the-arts have shown a trend of accuracy saturation on six commonly used benchmarks (IC13, IC15, SVT, IIIT5K, SVTP, CUTE80). This is a promissing result, but it also raises a question: **Are we done with STR?** Or it's just the lack of challenges in current benchmarks that cover the drawbacks of existing methods in read-world scenarios.
 <div align=center>
   <img src='github/acc_trend.png' width=400 >
@@ -31,6 +34,9 @@
     - [3.2. Union14M-U](#32-union14m-u)
     - [3.3. Union14M-Benchmark](#33-union14m-benchmark)
     - [3.4. Download](#34-download)
+  - [4. MAERec](#4-maerec)
+    - [4.1. Pre-training](#41-pre-training)
+    - [4.2. Fine-tuning](#42-fine-tuning)
 
 ## 3. Union14M Dataset
 ### 3.1. Union14M-L
@@ -56,3 +62,108 @@
 </div>
 
 ### 3.4. Download
+
+  | Datasets                        | Google Drive            | Baidu Netdisk     |
+  | ------------------------------- | ----------------------- | ----------------- |
+  | Union14M-L / Union14M-Benchmark | [Google Drive (8 GB)]() | [Baidu Netdisk]() |
+  | Union14M-U                      | [Google Drive (8 GB)]() | [Baidu Netdisk]() |
+
+
+- The Structure of Union14M will be organized as follows:
+
+  <details open>
+  <summary><strong>Structure of Union14M-L & Union14M-Benchmark</strong></summary>
+
+    ```text
+    |--Union14M-L
+      |--full_images
+        |--art_curve # Images collected from 14 datasets
+        |--art_scene
+        |--COCOTextV2
+        |--...
+  
+      |--annotations
+        |--mmocr-0.x # annotation in mmocr0.x format
+          |--train_challenging.jsonl # challenging subset
+          |--train_easy.jsonl # easy subset
+          |--train_hard.jsonl # hard subset
+          |--train_medium.jsonl # medium subset
+          |--train_normal.jsonl # normal subset
+          |--val_annos.jsonl # validation subset
+        |--mmocr1.0.x # annotation in mmocr1.0 format
+      
+      |--Union14M-Benchmarks
+        |--artistic
+          |--imgs
+          |--annotation.json # annotation in mmocr1.0 format
+          |--annotation.jsonl # annotation in mmocr0.x format
+        |--...
+    ```
+
+  </details>
+
+  <details open>
+  <summary><strong>Structure of Union14M-U</strong></summary>
+
+  ```text
+  |--Union14M-U
+    |--book32
+      |--
+    |--cc
+      |--cc
+        |--img1.jpg
+        |--...
+    |--openvino
+      |--test
+        |--img1.jpg
+        |--...
+      |--train_0
+        |--img1.jpg
+        |--...
+      |--train_3
+        |--img1.jpg
+        |--...
+      |--...
+  ```
+  </details>
+
+
+## 4. MAERec
+- MAERec is a scene text recognition model composed of a ViT backbone and a Transformer decoder in auto-regressive style. It shows an outstanding performance in scene text recognition, especially when pre-trained on the Union14M-U through MAE.
+
+  <div align=center>
+    <img src='github/maerec.png' width=400 >
+  </div>
+
+- Results of MAERec on six common benchmarks and Union14M-Benchmarks
+
+  <div align=center>
+    <img src='github/sota.png' width=800 >
+  </div>
+
+- Predictions of MAERec on some challenging examples
+
+  <div align=center>
+    <img src='github/examples.png' width=800 >
+  </div>
+
+
+
+### 4.1. Pre-training 
+- Pre-trained ViT
+
+  | Variants  | Input Size | Patch Size | Embedding | Depth | Heads | Parameters | Google Drive | Baidu Netdisk |
+  | --------- | ---------- | ---------- | --------- | ----- | ----- | ---------- | ------------ | ------------- |
+  | ViT-Small | 32x128     | 4x4        | 384       | 12    | 6     |            |              |               |
+  | ViT-Base  | 32x128     | 4x4        | 768       | 12    | 12    |            |              |               |
+- If you want to pre-train the ViT backbone on your own dataset, check [pre-training](docs/pretrain.md)
+
+### 4.2. Fine-tuning 
+- Fine-tuned MAERec
+
+  | Variants     | Acc on Common Benchmarks | Acc on Union14M-Benchmarks | Google Drive | Baidu Netdisk |
+  | ------------ | ------------------------ | -------------------------- | ------------ | ------------- |
+  | MAERec-Small | 95.1                     | 78.6                       |              |               |
+  | MAERec-Base  | 96.2                     | 85.2                       |              |               |
+
+- If you want to fine-tune MAERec on your own dataset, check [fine-tuning](docs/finetune.md)

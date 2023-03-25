@@ -16,7 +16,7 @@ label_convertor = dict(
     type='AttnConvertor', dict_type='DICT91', with_unknown=True)
 
 model = dict(
-    type='ViT',
+    type='MAERec',
     backbone=dict(
         type='VisionTransformer',
         img_size=(32, 128),
@@ -26,9 +26,9 @@ model = dict(
         num_heads=12,
         mlp_ratio=4.0,
         qkv_bias=True,
-        pretrained='pretrained/vit_base/epoch_19.pth'),
+        pretrained='mae_pretrained/vit_base/checkpoint-19.pth'),
     decoder=dict(
-        type='ViTDecoder',
+        type='MAERecDecoder',
         n_layers=6,
         d_embedding=768,
         n_head=8,
@@ -37,15 +37,14 @@ model = dict(
         d_k=96,
         d_v=96),
     loss=dict(type='TFLoss'),
-    label_convertor=dict(
-        type='AttnConvertor', dict_type='DICT91', with_unknown=True),
+    label_convertor=label_convertor,
     max_seq_len=32)
 
 data = dict(
     samples_per_gpu=64,
     workers_per_gpu=8,
-    val_dataloader=dict(samples_per_gpu=128),
-    test_dataloader=dict(samples_per_gpu=128),
+    val_dataloader=dict(samples_per_gpu=64),
+    test_dataloader=dict(samples_per_gpu=64),
     train=dict(
         type='UniformConcatDataset',
         datasets=train_list,

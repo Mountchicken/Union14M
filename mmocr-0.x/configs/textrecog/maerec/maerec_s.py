@@ -26,7 +26,7 @@ model = dict(
         num_heads=6,
         mlp_ratio=4.,
         qkv_bias=True,
-        pretrained='pretrained/vit_small/epoch_19.pth'),
+        pretrained='mae_pretrained/vit_small/checkpoint-19.pth'),
     decoder=dict(
         type='MAERecDecoder',
         n_layers=6,
@@ -42,10 +42,10 @@ model = dict(
 
 
 data = dict(
-    samples_per_gpu=256,
+    samples_per_gpu=64,
     workers_per_gpu=8,
-    val_dataloader=dict(samples_per_gpu=128),
-    test_dataloader=dict(samples_per_gpu=128),
+    val_dataloader=dict(samples_per_gpu=64),
+    test_dataloader=dict(samples_per_gpu=64),
     train=dict(
         type='UniformConcatDataset',
         datasets=train_list,
