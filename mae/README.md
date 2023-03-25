@@ -23,7 +23,7 @@ pip install -r requirements.txt
             |--image2.jpg
             |--...
     ```
-- You can aslo use Union14M-U for pre-training, which is organized in ImageFolder format.
+- You can aslo download [Union14M-U](../README.md/#34-download) for pre-training, which is organized in ImageFolder format.
 
 ### 3. Pre-training
 - Pre-training ViT-Small on Union14M-U with 4 gpus:
