@@ -26,7 +26,7 @@ pip install timm==0.3.2
 - Download [Union14M-L]() 
 
 ### 3. Fine-tuning MAERec on Union14M-L
-- 1. Download the [pre-trained ViT]()
+- 1. Download the [pre-trained ViT](../README.md#41-pre-training)
 - 2. Modify the config file `mmocr-0.x/configs/textrecog/maerec/maerec_b` to set the `pretrained` field in `model.backbone` to the path of the pre-trained ViT model.
 - 3. Modify the config file `mmocr-0.x/configs/_base_/recog_datasets/Union14M_train.py` to set the `train_root` field to the path of the Union14M-L dataset.
 - 4. Modify the config file `mmocr-0.x/configs/_base_/recog_datasets/Union14M_benchmark.py` to set the `test_root` field to the path of the Union14M-Benchmarks.
@@ -40,7 +40,7 @@ pip install timm==0.3.2
     ```
 
 ### 4. Evaluate MAERec on Union14M-Benchmarks
-- 1. Download the [pre-trained MAERec]()
+- 1. Download the [pre-trained MAERec](../README.md#42-fine-tuning)
 - 2. Modify the config file `mmocr-0.x/configs/_base_/recog_datasets/Union14M_benchmark.py` to set the `test_root` field to the path of the Union14M-Benchmarks.
 - 3. Run the following command to evaluate MAERec on Union14M-Benchmarks.
     ```bash
