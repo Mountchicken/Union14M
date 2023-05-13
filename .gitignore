@@ -5,3 +5,4 @@ recog_algorithms/
 data/
 baselines/
 dataset_funcs/
+mmocr-dev-1.x/work_dirs
