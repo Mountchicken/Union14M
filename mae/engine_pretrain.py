@@ -27,7 +27,7 @@ def train_one_epoch(model: torch.nn.Module,
         'lr', misc.SmoothedValue(window_size=1, fmt='{value:.6f}'))
     header = 'Epoch: [{}]'.format(epoch)
     print_freq = 20
-
+    patch_size = 4
     accum_iter = args.accum_iter
 
     optimizer.zero_grad()
@@ -83,7 +83,7 @@ def train_one_epoch(model: torch.nn.Module,
         # Visualize
         if log_writer is not None and (data_iter_step + 1) % log_freq == 0:
             vis_tensor = visualize_tensor(
-                imgs, reconstruction, mask, patch_size=model.patch_size)
+                imgs, reconstruction, mask, patch_size=patch_size)
             log_writer.add_image('train_vis', vis_tensor, epoch_1000x)
     # gather the stats from all processes
     metric_logger.synchronize_between_processes()
