@@ -10,8 +10,8 @@
    <strong><a href="#sota">arXiv </a></strong> •
    <strong><a href="#1-introduction">Introduction </a></strong> •
    <strong><a href="#34-download">Download </a></strong> •
-   <strong><a href="#4-maerec">MAERec</a></strong> •
-   <strong><a href="#MAERec">QAs</a></strong>
+   <strong><a href="#5-maerec">MAERec</a></strong> •
+   <strong><a href="#6-qas">QAs</a></strong>
    
 </p>
 
@@ -33,11 +33,14 @@
   - [3.2. Union14M-U](#32-union14m-u)
   - [3.3. Union14M-Benchmark](#33-union14m-benchmark)
   - [3.4. Download](#34-download)
-- [4. MAERec](#4-maerec)
-  - [4.1. Pre-training](#41-pre-training)
-  - [4.2. Fine-tuning](#42-fine-tuning)
-- [5. QAs](#5-qas)
-- [6. License](#6-license)
+- [4. STR Models trained on Union14M-L](#4-str-models-trained-on-union14m-l)
+  - [4.1. Checkpoints](#41-checkpoints)
+- [5. MAERec](#5-maerec)
+  - [5.1. Pre-training](#51-pre-training)
+  - [5.2. Fine-tuning](#52-fine-tuning)
+  - [5.3 Inferencing](#53-inferencing)
+- [6. QAs](#6-qas)
+- [7. License](#7-license)
 
 ## 3. Union14M Dataset
 ### 3.1. Union14M-L
@@ -72,18 +75,17 @@
 
 - The Structure of Union14M will be organized as follows:
 
-  <details open>
+  <details close>
   <summary><strong>Structure of Union14M-L & Union14M-Benchmark</strong></summary>
 
     ```text
     |--Union14M-L
       |--full_images
-        |--art_curve # Images collected from 14 datasets
+        |--art_curve # Images collected from the 14 datasets
         |--art_scene
         |--COCOTextV2
         |--...
-  
-      |--annotations
+      |--train_annos
         |--mmocr-0.x # annotation in mmocr0.x format
           |--train_challenging.jsonl # challenging subset
           |--train_easy.jsonl # easy subset
@@ -92,7 +94,7 @@
           |--train_normal.jsonl # normal subset
           |--val_annos.jsonl # validation subset
         |--mmocr1.0.x # annotation in mmocr1.0 format
-      
+          |--...
       |--Union14M-Benchmarks
         |--artistic
           |--imgs
@@ -103,7 +105,7 @@
 
   </details>
 
-  <details open>
+  <details close>
   <summary><strong>Structure of Union14M-U</strong></summary>
 
   ```text
@@ -128,8 +130,25 @@
   ```
   </details>
 
+## 4. STR Models trained on Union14M-L
+- We train serval STR models on Union14M-L using [MMOCR-1.0](https://github.com/open-mmlab/mmocr/tree/dev-1.x)
 
-## 4. MAERec
+### 4.1. Checkpoints
+- Evaluated on both common benchmarks and Union14M-Benchmark. Accuracy (WAICS) in gray are original implementation, and accuracay in green are trained on Union14M-L. Our models are trained to predict **upper & lower text, symbols and space.**
+
+  |         Models         |  Checkpoint  |                    IIIT5K                    |                     IC13                     |                     IC15                     |                     SVT                      |                     SVTP                     |                    CUTE80                    |                     Avg.                     |
+  | :--------------------: | :----------: | :------------------------------------------: | :------------------------------------------: | :------------------------------------------: | :------------------------------------------: | :------------------------------------------: | :------------------------------------------: | :------------------------------------------: |
+  |     [ASTER](#TODO)     | [Download]() | $\color{grey}{95.4}$ \ $\color{green}{95.4}$ | $\color{grey}{95.4}$ \ $\color{green}{95.4}$ | $\color{grey}{95.4}$ \ $\color{green}{95.4}$ | $\color{grey}{95.4}$ \ $\color{green}{95.4}$ | $\color{grey}{95.4}$ \ $\color{green}{95.4}$ | $\color{grey}{95.4}$ \ $\color{green}{95.4}$ | $\color{grey}{95.4}$ \ $\color{green}{95.4}$ |
+  |    [ABINet](#TODO)     | [Download]() | $\color{grey}{95.4}$ \ $\color{green}{95.4}$ | $\color{grey}{95.4}$ \ $\color{green}{95.4}$ | $\color{grey}{95.4}$ \ $\color{green}{95.4}$ | $\color{grey}{95.4}$ \ $\color{green}{95.4}$ | $\color{grey}{95.4}$ \ $\color{green}{95.4}$ | $\color{grey}{95.4}$ \ $\color{green}{95.4}$ | $\color{grey}{95.4}$ \ $\color{green}{95.4}$ |
+  |     [NRTR](#TODO)      | [Download]() | $\color{grey}{95.4}$ \ $\color{green}{95.4}$ | $\color{grey}{95.4}$ \ $\color{green}{95.4}$ | $\color{grey}{95.4}$ \ $\color{green}{95.4}$ | $\color{grey}{95.4}$ \ $\color{green}{95.4}$ | $\color{grey}{95.4}$ \ $\color{green}{95.4}$ | $\color{grey}{95.4}$ \ $\color{green}{95.4}$ | $\color{grey}{95.4}$ \ $\color{green}{95.4}$ |
+  |     [SATRN](#TODO)     | [Download]() | $\color{grey}{95.4}$ \ $\color{green}{95.4}$ | $\color{grey}{95.4}$ \ $\color{green}{95.4}$ | $\color{grey}{95.4}$ \ $\color{green}{95.4}$ | $\color{grey}{95.4}$ \ $\color{green}{95.4}$ | $\color{grey}{95.4}$ \ $\color{green}{95.4}$ | $\color{grey}{95.4}$ \ $\color{green}{95.4}$ | $\color{grey}{95.4}$ \ $\color{green}{95.4}$ |
+  |    [MASTER](#TODO)     | [Download]() | $\color{grey}{95.4}$ \ $\color{green}{95.4}$ | $\color{grey}{95.4}$ \ $\color{green}{95.4}$ | $\color{grey}{95.4}$ \ $\color{green}{95.4}$ | $\color{grey}{95.4}$ \ $\color{green}{95.4}$ | $\color{grey}{95.4}$ \ $\color{green}{95.4}$ | $\color{grey}{95.4}$ \ $\color{green}{95.4}$ | $\color{grey}{95.4}$ \ $\color{green}{95.4}$ |
+  | [RobustScanner](#TODO) | [Download]() | $\color{grey}{95.4}$ \ $\color{green}{95.4}$ | $\color{grey}{95.4}$ \ $\color{green}{95.4}$ | $\color{grey}{95.4}$ \ $\color{green}{95.4}$ | $\color{grey}{95.4}$ \ $\color{green}{95.4}$ | $\color{grey}{95.4}$ \ $\color{green}{95.4}$ | $\color{grey}{95.4}$ \ $\color{green}{95.4}$ | $\color{grey}{95.4}$ \ $\color{green}{95.4}$ |
+  |      [SAR](#TODO)      | [Download]() | $\color{grey}{95.4}$ \ $\color{green}{95.4}$ | $\color{grey}{95.4}$ \ $\color{green}{95.4}$ | $\color{grey}{95.4}$ \ $\color{green}{95.4}$ | $\color{grey}{95.4}$ \ $\color{green}{95.4}$ | $\color{grey}{95.4}$ \ $\color{green}{95.4}$ | $\color{grey}{95.4}$ \ $\color{green}{95.4}$ | $\color{grey}{95.4}$ \ $\color{green}{95.4}$ |
+
+
+
+## 5. MAERec
 - MAERec is a scene text recognition model composed of a ViT backbone and a Transformer decoder in auto-regressive style. It shows an outstanding performance in scene text recognition, especially when pre-trained on the Union14M-U through MAE.
 
   <div align=center>
@@ -149,8 +168,7 @@
   </div>
 
 
-
-### 4.1. Pre-training 
+### 5.1. Pre-training 
 - Pre-trained ViT
 
   | Variants  | Input Size | Patch Size | Embedding | Depth | Heads | Parameters | Google Drive | Baidu Netdisk |
@@ -159,7 +177,7 @@
   | ViT-Base  | 32x128     | 4x4        | 768       | 12    | 12    |            |              |               |
 - If you want to pre-train the ViT backbone on your own dataset, check [pre-training](docs/pretrain.md)
 
-### 4.2. Fine-tuning 
+### 5.2. Fine-tuning 
 - Fine-tuned MAERec
 
   | Variants     | Acc on Common Benchmarks | Acc on Union14M-Benchmarks | Google Drive | Baidu Netdisk |
@@ -169,9 +187,11 @@
 
 - If you want to fine-tune MAERec on your own dataset, check [fine-tuning](docs/finetune.md)
 
+### 5.3 Inferencing
+- If you want to inferencing MAERec on your raw pictures, check [inferencing](docs/inferencing.md)
 
-## 5. QAs
+## 6. QAs
 
 
-## 6. License
+## 7. License
 
