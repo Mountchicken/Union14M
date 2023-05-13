@@ -46,7 +46,7 @@ model = dict(
         std=[127.5, 127.5, 127.5]))
 
 train_pipeline = [
-    dict(type='LoadImageFromFile', ignore_empty=True, min_size=5),
+    dict(type='LoadImageFromFile', ignore_empty=True, min_size=0),
     dict(type='LoadOCRAnnotations', with_text=True),
     dict(type='Resize', scale=(256, 64)),
     dict(

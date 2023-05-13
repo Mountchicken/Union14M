@@ -1,4 +1,4 @@
-icdar2013_textrecog_data_root = 'data/icdar2013'
+icdar2013_textrecog_data_root = '../data/common_benchmarks/IC13'
 
 icdar2013_textrecog_train = dict(
     type='OCRDataset',
@@ -9,7 +9,7 @@ icdar2013_textrecog_train = dict(
 icdar2013_textrecog_test = dict(
     type='OCRDataset',
     data_root=icdar2013_textrecog_data_root,
-    ann_file='textrecog_test.json',
+    ann_file='annotation.json',
     test_mode=True,
     pipeline=None)
 

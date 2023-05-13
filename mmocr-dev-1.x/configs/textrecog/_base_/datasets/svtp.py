@@ -1,4 +1,4 @@
-svtp_textrecog_data_root = 'data/svtp'
+svtp_textrecog_data_root = '../data/common_benchmarks/SVTP'
 
 svtp_textrecog_train = dict(
     type='OCRDataset',
@@ -9,6 +9,6 @@ svtp_textrecog_train = dict(
 svtp_textrecog_test = dict(
     type='OCRDataset',
     data_root=svtp_textrecog_data_root,
-    ann_file='textrecog_test.json',
+    ann_file='annotation.json',
     test_mode=True,
     pipeline=None)
