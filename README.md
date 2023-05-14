@@ -134,7 +134,7 @@
 - We train serval STR models on Union14M-L using [MMOCR-1.0](https://github.com/open-mmlab/mmocr/tree/dev-1.x)
 
 ### 4.1. Checkpoints
-- Evaluated on both common benchmarks and Union14M-Benchmark. Accuracy (WAICS) in gray are original implementation, and accuracay in green are trained on Union14M-L. Our models are trained to predict **upper & lower text, symbols and space.**
+- Evaluated on both common benchmarks and Union14M-Benchmark. Accuracy (WAICS) in $\color{grey}{grey}$ are original implementation, and accuracay in $\color{green}{green}$ are trained on Union14M-L. Our models are trained to predict **upper & lower text, symbols and space.**
 
   |         Models         |  Checkpoint  |                    IIIT5K                    |                     SVT                     |                     IC13-1015                     |                     IC15-2077                      |                     SVTP                     |                    CUTE80                    |                     Avg.                     |
   | :--------------------: | :----------: | :------------------------------------------: | :------------------------------------------: | :------------------------------------------: | :------------------------------------------: | :------------------------------------------: | :------------------------------------------: | :------------------------------------------: |
