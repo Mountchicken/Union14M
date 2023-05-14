@@ -47,7 +47,7 @@ val_dataset = dict(
     type='ConcatDataset', datasets=val_list, pipeline=_base_.test_pipeline)
 
 train_dataloader = dict(
-    batch_size=64,
+    batch_size=128,
     num_workers=12,
     persistent_workers=True,
     pin_memory=True,

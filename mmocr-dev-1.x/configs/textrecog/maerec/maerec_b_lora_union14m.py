@@ -10,9 +10,10 @@ _base_ = [
     '../_base_/datasets/icdar2013.py',
     '../_base_/datasets/icdar2015.py',
     '../_base_/default_runtime.py',
-    '../_base_/schedules/schedule_adamw_cos_6e.py',
+    '../_base_/schedules/schedule_adamw_cos_10e.py',
 ]
 
+_base_.model.pop('backbone')
 model = dict(
     backbone=dict(
         type='VisionTransformer_LoRA',
@@ -26,8 +27,16 @@ model = dict(
             qkv_bias=True,
             pretrained=  # noqa
             '../mae/mae_pretrained/vit_base/vit_base_checkpoint-19.pth'),
-        rank=4))
-
+        rank=4),
+    decoder=dict(
+        type='MAERecDecoder',
+        n_layers=6,
+        d_embedding=768,
+        n_head=8,
+        d_model=768,
+        d_inner=3072,
+        d_k=96,
+        d_v=96))
 
 # dataset settings
 train_list = [

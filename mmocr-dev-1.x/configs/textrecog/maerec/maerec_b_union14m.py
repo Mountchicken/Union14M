@@ -23,8 +23,17 @@ model = dict(
         num_heads=12,
         mlp_ratio=4.0,
         qkv_bias=True,
-        pretrained='../mae/mae_pretrained/vit_base/vit_base_checkpoint-19.pth')
-)
+        pretrained='../mae/mae_pretrained/vit_base/vit_base_checkpoint-19.pth'
+    ),
+    decoder=dict(
+        type='MAERecDecoder',
+        n_layers=6,
+        d_embedding=768,
+        n_head=8,
+        d_model=768,
+        d_inner=3072,
+        d_k=96,
+        d_v=96))
 
 # dataset settings
 train_list = [

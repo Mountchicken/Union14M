@@ -14,7 +14,7 @@ from .base import BaseDecoder
 
 
 @MODELS.register_module()
-class MARecDecoder(BaseDecoder):
+class MAERecDecoder(BaseDecoder):
     """Transformer Decoder block with self attention mechanism.
 
     Args:

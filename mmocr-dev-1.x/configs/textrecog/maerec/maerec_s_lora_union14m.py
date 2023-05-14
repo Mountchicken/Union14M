@@ -13,10 +13,12 @@ _base_ = [
     '../_base_/schedules/schedule_adamw_cos_6e.py',
 ]
 
+_base_.model.pop('backbone')
 model = dict(
     backbone=dict(
         type='VisionTransformer_LoRA',
         vit_config=dict(
+            type='VisionTransformer',
             img_size=(32, 128),
             patch_size=(4, 4),
             embed_dim=384,

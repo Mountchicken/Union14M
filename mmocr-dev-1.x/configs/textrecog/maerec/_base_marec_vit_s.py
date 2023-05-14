@@ -24,12 +24,12 @@ model = dict(
     decoder=dict(
         type='MAERecDecoder',
         n_layers=6,
-        d_embedding=768,
+        d_embedding=384,
         n_head=8,
-        d_model=768,
-        d_inner=3072,
-        d_k=96,
-        d_v=96,
+        d_model=384,
+        d_inner=384*4,
+        d_k=48,
+        d_v=48,
         postprocessor=dict(type='AttentionPostprocessor'),
         module_loss=dict(
             type='CEModuleLoss', reduction='mean', ignore_first_char=True),

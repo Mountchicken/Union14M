@@ -85,7 +85,10 @@ class VisionTransformer(timm.models.vision_transformer.VisionTransformer):
                         k].shape != state_dict[k].shape:
                     print(f"Removing key {k} from pretrained checkpoint")
                     del checkpoint_model[k]
-
+            # remove key with decoder
+            for k in list(checkpoint_model.keys()):
+                if 'decoder' in k:
+                    del checkpoint_model[k]
             msg = self.load_state_dict(checkpoint_model, strict=False)
             print(msg)
 
@@ -164,7 +167,7 @@ class VisionTransformer_LoRA(nn.Module):
                  lora_layers: int = None,
                  pretrained_lora: str = None):
         super(VisionTransformer_LoRA, self).__init__()
-        self.vit = VisionTransformer(**vit_config)
+        self.vit = MODELS.build(vit_config)
         assert rank > 0
         if lora_layers:
             self.lora_layers = lora_layers
