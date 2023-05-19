@@ -12,8 +12,6 @@ _base_ = [
     '_base_satrn_shallow.py',
 ]
 
-train_cfg = dict(type='EpochBasedTrainLoop', max_epochs=20, val_interval=1)
-
 dictionary = dict(
     type='Dictionary',
     dict_file=  # noqa

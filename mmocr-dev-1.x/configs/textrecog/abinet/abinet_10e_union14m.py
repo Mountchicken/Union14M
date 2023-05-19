@@ -1,6 +1,4 @@
-# training schedule for 1x
 _base_ = [
-    '_base_marec_vit_s.py',
     '../_base_/datasets/union14m_train.py',
     '../_base_/datasets/union14m_benchmark.py',
     '../_base_/datasets/cute80.py',
@@ -10,25 +8,54 @@ _base_ = [
     '../_base_/datasets/icdar2013.py',
     '../_base_/datasets/icdar2015.py',
     '../_base_/default_runtime.py',
-    '../_base_/schedules/schedule_adamw_cos_6e.py',
+    '../_base_/schedules/schedule_adamw_cos_10e.py',
+    '_base_abinet.py',
 ]
 
-_base_.model.pop('backbone')
+load_from = 'https://download.openmmlab.com/mmocr/textrecog/abinet/abinet_pretrain-45deac15.pth'  # noqa
+
+_base_.pop('model')
+dictionary = dict(
+    type='Dictionary',
+    dict_file=  # noqa
+    '{{ fileDirname }}/../../../dicts/english_digits_symbols_space.txt',
+    with_padding=True,
+    with_unknown=True,
+    same_start_end=True,
+    with_start=True,
+    with_end=True)
+
 model = dict(
-    backbone=dict(
-        type='VisionTransformer_LoRA',
-        vit_config=dict(
-            type='VisionTransformer',
-            img_size=(32, 128),
-            patch_size=(4, 4),
-            embed_dim=384,
-            depth=12,
-            num_heads=6,
-            mlp_ratio=4.0,
-            qkv_bias=True,
-            pretrained=  # noqa
-            '../mae/mae_pretrained/vit_small/vit_small_checkpoint-19.pth'),
-        rank=4))
+    type='ABINet',
+    backbone=dict(type='ResNetABI'),
+    encoder=dict(
+        type='ABIEncoder',
+        n_layers=3,
+        n_head=8,
+        d_model=512,
+        d_inner=2048,
+        dropout=0.1,
+        max_len=8 * 32,
+    ),
+    decoder=dict(
+        type='ABIFuser',
+        vision_decoder=dict(
+            type='ABIVisionDecoder',
+            in_channels=512,
+            num_channels=64,
+            attn_height=8,
+            attn_width=32,
+            attn_mode='nearest',
+            init_cfg=dict(type='Xavier', layer='Conv2d')),
+        module_loss=dict(type='ABIModuleLoss'),
+        postprocessor=dict(type='AttentionPostprocessor'),
+        dictionary=dictionary,
+        max_seq_len=26,
+    ),
+    data_preprocessor=dict(
+        type='TextRecogDataPreprocessor',
+        mean=[123.675, 116.28, 103.53],
+        std=[58.395, 57.12, 57.375]))
 
 # dataset settings
 train_list = [
@@ -52,10 +79,6 @@ test_list = [
     _base_.union14m_benchmark_general,
 ]
 
-default_hooks = dict(logger=dict(type='LoggerHook', interval=50))
-
-auto_scale_lr = dict(base_batch_size=512)
-
 train_dataset = dict(
     type='ConcatDataset', datasets=train_list, pipeline=_base_.train_pipeline)
 test_dataset = dict(
@@ -65,9 +88,8 @@ val_dataset = dict(
 
 train_dataloader = dict(
     batch_size=128,
-    num_workers=12,
+    num_workers=24,
     persistent_workers=True,
-    pin_memory=True,
     sampler=dict(type='DefaultSampler', shuffle=True),
     dataset=train_dataset)
 
@@ -75,7 +97,6 @@ test_dataloader = dict(
     batch_size=128,
     num_workers=4,
     persistent_workers=True,
-    pin_memory=True,
     drop_last=False,
     sampler=dict(type='DefaultSampler', shuffle=False),
     dataset=test_dataset)
@@ -91,7 +112,6 @@ val_dataloader = dict(
 
 val_evaluator = dict(
     dataset_prefixes=['CUTE80', 'IIIT5K', 'SVT', 'SVTP', 'IC13', 'IC15'])
-
 test_evaluator = dict(dataset_prefixes=[
     'artistic', 'multi-oriented', 'contextless', 'curve', 'incomplete',
     'incomplete-ori', 'multi-words', 'salient', 'general'
