@@ -6,3 +6,5 @@ data/
 baselines/
 dataset_funcs/
 mmocr-dev-1.x/work_dirs
+add_data/
+mmocr-0.x/
