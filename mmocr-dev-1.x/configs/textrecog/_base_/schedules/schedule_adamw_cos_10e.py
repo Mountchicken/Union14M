@@ -16,6 +16,6 @@ param_scheduler = [
     dict(
         type='CosineAnnealingLR',
         T_max=10,
-        eta_min=1e-8,
+        eta_min=4e-6,
         convert_to_iter_based=True)
 ]
