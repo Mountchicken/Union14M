@@ -53,6 +53,7 @@
     - [5.3. Evaluation](#53-evaluation)
     - [5.4. Inferencing](#54-inferencing)
     - [5.5. ONNX Export](#55-onnx-export)
+    - [5.6. Gradio APP](#56-gradio-app)
   - [6. QAs](#6-qas)
   - [7. License](#7-license)
   - [8. Acknowledgement](#8-acknowledgement)
@@ -86,7 +87,7 @@
   | Datasets                               | Google Drive            | Baidu Netdisk                                                             |
   | -------------------------------------- | ----------------------- | ------------------------------------------------------------------------- |
   | Union14M-L & Union14M-Benchmark (12GB) | [Google Drive (8 GB)]() | [Baidu Netdisk](https://pan.baidu.com/s/1WiXfg9YjKiO1SzBfT14mmg?pwd=anxs) |
-  | Union14M-U (36.63GB)                   | [Google Drive (8 GB)]() | [Baidu Netdisk]()                                                         |
+  | Union14M-U (36.63GB)                   | [Google Drive (8 GB)]() | [Baidu Netdisk](https://pan.baidu.com/s/1yOUCYgjwSB8czmZyyX56PA?pwd=4c9v) |
   | 6 Common Benchmarks (17.6MB)           | [Google Drive (8 GB)]() | [Baidu Netdisk](https://pan.baidu.com/s/1XifQS0v-0YxEXkGTfWMDWQ?pwd=35cz) |
 
 <!-- TODO: Add Google Drive Links -->
@@ -201,6 +202,27 @@
 
 ### 5.5. ONNX Export
 
+
+### 5.6. Gradio APP
+- We also provide a Gradio APP for MAERec, which can be used to inferencing on your own pictures. You can run it locally
+or play with it on [HuggingFace Spaces](https://huggingface.co/spaces/akhaliq/maerec-gradio-app).
+- To run it locally, you can run the following command:
+  ```bash
+  pip install gradio
+  # download weight for MAERec
+  # download weight for DBNet++
+  wget https://download.openmmlab.com/mmocr/textdet/dbnetpp/dbnetpp_resnet50-oclip_fpnc_1200e_icdar2015/dbnetpp_resnet50-oclip_fpnc_1200e_icdar2015_20221101_124139-4ecb39ac.pth -O dbnetpp
+  python tools/gradio_app.py \
+    --rec_config mmocr-dev-1.x/configs/textrecog/maerec/maerec_b_union14m.py \
+    --rec_weight ${PATH_TO_MAEREC_B} \
+    --det_config mmocr-dev-1.x/configs/textdet/dbnetpp/dbnetpp_resnet50-oclip_fpnc_1200e_icdar2015.py \
+    --det_weight ${PATH_TO_DBNETPP} \
+  ```
+
+<div align=center>
+  <img src='github/gradio3.png' width=600 >
+</div>
+
 ## 6. QAs
 
 
@@ -211,3 +233,4 @@
 - We sincerely thank all the constructors of the 17 datasets used in Union14M, and also the developers of MMOCR, which is a powerful toolbox for OCR research.
 
 ## 9. Citation
+
