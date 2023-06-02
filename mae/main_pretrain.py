@@ -21,6 +21,7 @@ import models_mae
 import util.misc as misc
 from engine_pretrain import train_one_epoch
 from util.misc import NativeScalerWithGradNormCount as NativeScaler
+from datasets.lmdb_dataset import lmdbDataset
 
 assert timm.__version__ == "0.3.2"  # version check
 
@@ -172,15 +173,27 @@ def main(args):
         transforms.Normalize(mean=[0.5, 0.5, 0.5], std=[0.5, 0.5, 0.5])
     ])
 
+    # check if it is lmdb dataset
     if isinstance(args.data_path, list):
-        dataset_train = datasets.ImageFolder(args.data_path[0],
-                                             transform_train)
+        files = os.listdir(args.data_path[0])
+    else:
+        files = os.listdir(args.data_path)
+    for f in files:
+        if '.mdb' in f:
+            dataset_type = lmdbDataset
+            break
+        if os.path.isdir(os.path.join(args.data_path, f)):
+            dataset_type = datasets.ImageFolder
+            break
+
+    if isinstance(args.data_path, list):
+        dataset_train = dataset_type(args.data_path[0], transform_train)
         for p in args.data_path[1:]:
             dataset_train = torch.utils.data.ConcatDataset(
                 [dataset_train,
-                 datasets.ImageFolder(p, transform_train)])
+                 dataset_type(p, transform_train)])
     else:
-        dataset_train = datasets.ImageFolder(
+        dataset_train = dataset_type(
             os.path.join(args.data_path), transform=transform_train)
     print(dataset_train)
 
@@ -273,8 +286,10 @@ def main(args):
                 epoch=epoch)
 
         log_stats = {
-            **{f'train_{k}': v
-               for k, v in train_stats.items()},
+            **{
+                f'train_{k}': v
+                for k, v in train_stats.items()
+            },
             'epoch': epoch,
         }
 

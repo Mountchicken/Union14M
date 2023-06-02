@@ -1,13 +1,24 @@
-/# Union14M Dataset
+<div align=center
 
+# Rethinking Scene Text Recognition: A Data Perspective
+
+</div>
 <div align=center>
   <img src='github/cover.png' width=600 >
 </div>
 <div align=center>
   <p >Union14M is a large scene text recognition (STR) dataset collected from 17 publicly available datasets, which contains 4M of labeled data (Union14M-L) and 10M of unlabeled data (Union14M-U), intended to provide a more profound analysis for the STR community</p>
+
+<div align=center>
+
+[![arXiv preprint](http://img.shields.io/badge/arXiv-2207.06966-b31b1b)](https://arxiv.org/abs/2207.06966) [![Gradio demo](https://img.shields.io/badge/%F0%9F%A4%97%20demo-Gradio-ff7c00)](https://huggingface.co/spaces/baudm/PARSeq-OCR) [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/bipinKrishnan/fastai_course/blob/master/bear_classifier.ipynb)     
+
+
+</div>
+
+
 </div>
 <p align="center">
-   <strong><a href="#sota">arXiv </a></strong> •
    <strong><a href="#1-introduction">Introduction </a></strong> •
    <strong><a href="#34-download">Download </a></strong> •
    <strong><a href="#5-maerec">MAERec</a></strong> •
@@ -26,21 +37,26 @@
 - To explore the challenges that STR models still face, we consolidate a large-scale STR dataset for analysis and identified seven open challenges. Furthermore, we propose a challenge-driven benchmark to facilitate the future development of STR. Additionally, we reveal that the utilization of massive unlabeled data through self-supervised pre-training can remarkably enhance the performance of the STR model in real-world scenarios, suggesting a practical solution for STR from a data perspective. We hope this work can spark future research beyond the realm of existing data paradigms.
 
 ## 2. Contents
-- [1. Introduction](#1-introduction)
-- [2. Contents](#2-contents)
-- [3. Union14M Dataset](#3-union14m-dataset)
-  - [3.1. Union14M-L](#31-union14m-l)
-  - [3.2. Union14M-U](#32-union14m-u)
-  - [3.3. Union14M-Benchmark](#33-union14m-benchmark)
-  - [3.4. Download](#34-download)
-- [4. STR Models trained on Union14M-L](#4-str-models-trained-on-union14m-l)
-  - [4.1. Checkpoints](#41-checkpoints)
-- [5. MAERec](#5-maerec)
-  - [5.1. Pre-training](#51-pre-training)
-  - [5.2. Fine-tuning](#52-fine-tuning)
-  - [5.3 Inferencing](#53-inferencing)
-- [6. QAs](#6-qas)
-- [7. License](#7-license)
+- [Rethinking Scene Text Recognition: A Data Perspective](#rethinking-scene-text-recognition-a-data-perspective)
+  - [1. Introduction](#1-introduction)
+  - [2. Contents](#2-contents)
+  - [3. Union14M Dataset](#3-union14m-dataset)
+    - [3.1. Union14M-L](#31-union14m-l)
+    - [3.2. Union14M-U](#32-union14m-u)
+    - [3.3. Union14M-Benchmark](#33-union14m-benchmark)
+    - [3.4. Download](#34-download)
+  - [4. STR Models trained on Union14M-L](#4-str-models-trained-on-union14m-l)
+    - [4.1. Checkpoints](#41-checkpoints)
+  - [5. MAERec](#5-maerec)
+    - [5.1. Pre-training](#51-pre-training)
+    - [5.2. Fine-tuning](#52-fine-tuning)
+    - [5.3. Evaluation](#53-evaluation)
+    - [5.4. Inferencing](#54-inferencing)
+    - [5.4. ONNX Conversion](#54-onnx-conversion)
+  - [6. QAs](#6-qas)
+  - [7. License](#7-license)
+  - [8. Acknowledgement](#8-acknowledgement)
+  - [9. Citation](#9-citation)
 
 ## 3. Union14M Dataset
 ### 3.1. Union14M-L
@@ -73,6 +89,7 @@
   | Union14M-U (36.63GB)                   | [Google Drive (8 GB)]() | [Baidu Netdisk]()                                                         |
   | 6 Common Benchmarks (17.6MB)           | [Google Drive (8 GB)]() | [Baidu Netdisk](https://pan.baidu.com/s/1XifQS0v-0YxEXkGTfWMDWQ?pwd=35cz) |
 
+<!-- TODO: Add Google Drive Links -->
 
 - The Structure of Union14M will be organized as follows:
 
@@ -109,7 +126,7 @@
   <details close>
   <summary><strong>Structure of Union14M-U</strong></summary>
 
-  We store images in LMDB format, and the structure of Union14M-U will be organized as belows. Here is an example of using [LMDB Example]()
+  We store images in [LMDB](https://github.com/Mountchicken/Efficient-Deep-Learning/blob/main/Efficient_DataProcessing.md#21-efficient-data-storage-methods) format, and the structure of Union14M-U will be organized as belows. Here is an example of using [LMDB Example]()
   ```text
   |--Union14M-U
     |--book32_lmdb
@@ -122,7 +139,7 @@
 - We train serval STR models on Union14M-L using [MMOCR-1.0](https://github.com/open-mmlab/mmocr/tree/dev-1.x)
 
 ### 4.1. Checkpoints
-- Evaluated on both common benchmarks and Union14M-Benchmark. Accuracy (WAICS) in $\color{grey}{grey}$ are original implementation (Trained on synthtic datasest), and accuracay in $\color{green}{green}$ are trained on Union14M-L. Our models are trained to predict **upper & lower text, symbols and space.**
+- Evaluated on both common benchmarks and Union14M-Benchmark. Accuracy (WAICS) in $\color{grey}{grey}$ are original implementation (Trained on synthtic datasest), and accuracay in $\color{green}{green}$ are trained on Union14M-L. All the re-trained models are trained to predict **upper & lower text, symbols and space.**
 
   |                                          Models                                           |                                                                                Checkpoint                                                                                 |                     IIIT5K                     |                      SVT                       |                   IC13-1015                    |                   IC15-2077                    |                      SVTP                      |                     CUTE80                     |                      Avg.                      |
   | :---------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :--------------------------------------------: | :--------------------------------------------: | :--------------------------------------------: | :--------------------------------------------: | :--------------------------------------------: | :--------------------------------------------: | :--------------------------------------------: |
@@ -155,29 +172,42 @@
 
 
 ### 5.1. Pre-training 
-- Pre-trained ViT
+- ViT pretrained on Union14M-U.
 
-  | Variants  | Input Size | Patch Size | Embedding | Depth | Heads | Parameters | Download                                                                                |
-  | --------- | ---------- | ---------- | --------- | ----- | ----- | ---------- | --------------------------------------------------------------------------------------- |
-  | ViT-Small | 32x128     | 4x4        | 384       | 12    | 6     |            | [Google Drive]() / [BaiduYun](https://pan.baidu.com/s/1nZL5veMyWhxpk8DGj0UZMw?pwd=xecv) |
-  | ViT-Base  | 32x128     | 4x4        | 768       | 12    | 12    |            | [Google Drive]() / [BaiduYun](https://pan.baidu.com/s/17CjAOV-1kf1__a2RBo9NUg?pwd=3rvx) |
+  | Variants | Input Size | Patch Size | Embedding | Depth | Heads | Parameters | Download                                                                                |
+  | -------- | ---------- | ---------- | --------- | ----- | ----- | ---------- | --------------------------------------------------------------------------------------- |
+  | ViT-S    | 32x128     | 4x4        | 384       | 12    | 6     | 21M        | [Google Drive]() / [BaiduYun](https://pan.baidu.com/s/1nZL5veMyWhxpk8DGj0UZMw?pwd=xecv) |
+  | ViT-B    | 32x128     | 4x4        | 768       | 12    | 12    | 85M        | [Google Drive]() / [BaiduYun](https://pan.baidu.com/s/17CjAOV-1kf1__a2RBo9NUg?pwd=3rvx) |
 - If you want to pre-train the ViT backbone on your own dataset, check [pre-training](docs/pretrain.md)
 
-### 5.2. Fine-tuning 
-- Fine-tuned MAERec
+<!-- TODO: Add Google Drive Link -->
 
-  | Variants     | Acc on Common Benchmarks | Acc on Union14M-Benchmarks | Download                                                                                                                                                                  |
-  | ------------ | ------------------------ | -------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-  | MAERec-Small | 95.1                     | 78.6                       | [Google Drive](https://drive.google.com/file/d/1dKLS_r3_ysWK155pSmkm7NBf5ALsEJYd/view?usp=sharing) / [BaiduYun](https://pan.baidu.com/s/1wFhLQLrn9dm77TMpdxyNAg?pwd=trg4) |
-  | MAERec-Base  | 96.2                     | 85.2                       | [Google Drive](https://drive.google.com/file/d/13E0cmvksKwvjNuR62xZhwkg8eQJfb_Hp/view?usp=sharing) / [BaiduYun](https://pan.baidu.com/s/1EhoJ-2WqkzOQFCNg55-KcA?pwd=5yx1) |
+### 5.2. Fine-tuning 
+- MAERec finetuned on Union14M-L
+
+  | Variants | Acc on Common Benchmarks | Acc on Union14M-Benchmarks | Download                                                                                                                                                                  |
+  | -------- | ------------------------ | -------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+  | MAERec-S | 95.1                     | 78.6                       | [Google Drive](https://drive.google.com/file/d/1dKLS_r3_ysWK155pSmkm7NBf5ALsEJYd/view?usp=sharing) / [BaiduYun](https://pan.baidu.com/s/1wFhLQLrn9dm77TMpdxyNAg?pwd=trg4) |
+  | MAERec-B | 96.2                     | 85.2                       | [Google Drive](https://drive.google.com/file/d/13E0cmvksKwvjNuR62xZhwkg8eQJfb_Hp/view?usp=sharing) / [BaiduYun](https://pan.baidu.com/s/1EhoJ-2WqkzOQFCNg55-KcA?pwd=5yx1) |
 
 - If you want to fine-tune MAERec on your own dataset, check [fine-tuning](docs/finetune.md)
 
-### 5.3 Inferencing
+### 5.3. Evaluation
+- If you want to evaluate MAERec on benchmarks, check [evaluation](docs/evaluation.md)
+
+### 5.4. Inferencing
 - If you want to inferencing MAERec on your raw pictures, check [inferencing](docs/inferencing.md)
+
+
+### 5.4. ONNX Conversion
 
 ## 6. QAs
 
 
 ## 7. License
+- The repository is released under the [MIT license](LICENSE).
 
+## 8. Acknowledgement
+- We sincerely thank all the constructors of the 17 datasets used in Union14M, and also the developers of MMOCR, which is a powerful toolbox for OCR research.
+
+## 9. Citation

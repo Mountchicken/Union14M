@@ -1,2 +1,4 @@
 timm==0.3.2
 tensorboard==2.11.0
+lmdb==1.4.1
+numpy<=1.23.0
