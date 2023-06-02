@@ -1,6 +1,4 @@
-# training schedule for 1x
 _base_ = [
-    '_base_marec_vit_s.py',
     '../_base_/datasets/union14m_train.py',
     '../_base_/datasets/union14m_benchmark.py',
     '../_base_/datasets/cute80.py',
@@ -10,31 +8,48 @@ _base_ = [
     '../_base_/datasets/icdar2013.py',
     '../_base_/datasets/icdar2015.py',
     '../_base_/default_runtime.py',
-    '../_base_/schedules/schedule_adamw_cos_6e.py',
+    '../_base_/schedules/schedule_adam_step_5e.py',
+    '_base_sar_resnet31_parallel-decoder.py',
 ]
 
+_base_.pop('model')
+dictionary = dict(
+    type='Dictionary',
+    dict_file=  # noqa
+    '{{ fileDirname }}/../../../dicts/english_digits_symbols_space.txt',
+    with_padding=True,
+    with_unknown=True,
+    same_start_end=True,
+    with_start=True,
+    with_end=True)
+
 model = dict(
-    backbone=dict(
-        type='VisionTransformer',
-        img_size=(32, 128),
-        patch_size=4,
-        embed_dim=768,
-        depth=12,
-        num_heads=12,
-        mlp_ratio=4.0,
-        qkv_bias=True,
-        pretrained='../mae/mae_pretrained/vit_base/vit_base_checkpoint-19.pth'
+    type='SARNet',
+    data_preprocessor=dict(
+        type='TextRecogDataPreprocessor',
+        mean=[127, 127, 127],
+        std=[127, 127, 127]),
+    backbone=dict(type='ResNet31OCR'),
+    encoder=dict(
+        type='SAREncoder',
+        enc_bi_rnn=False,
+        enc_do_rnn=0.1,
+        enc_gru=False,
     ),
     decoder=dict(
-        type='MAERecDecoder',
-        n_layers=6,
-        d_embedding=768,
-        n_head=8,
-        d_model=768,
-        d_inner=3072,
-        d_k=96,
-        d_v=96))
-
+        type='SequentialSARDecoder',
+        enc_bi_rnn=False,
+        dec_bi_rnn=False,
+        dec_do_rnn=0,
+        dec_gru=False,
+        pred_dropout=0.1,
+        d_k=512,
+        pred_concat=True,
+        postprocessor=dict(type='AttentionPostprocessor'),
+        module_loss=dict(
+            type='CEModuleLoss', ignore_first_char=True, reduction='mean'),
+        dictionary=dictionary,
+        max_seq_len=30))
 # dataset settings
 train_list = [
     _base_.union14m_challenging, _base_.union14m_hard, _base_.union14m_medium,
@@ -57,10 +72,6 @@ test_list = [
     _base_.union14m_benchmark_general,
 ]
 
-default_hooks = dict(logger=dict(type='LoggerHook', interval=50))
-
-auto_scale_lr = dict(base_batch_size=512)
-
 train_dataset = dict(
     type='ConcatDataset', datasets=train_list, pipeline=_base_.train_pipeline)
 test_dataset = dict(
@@ -69,10 +80,9 @@ val_dataset = dict(
     type='ConcatDataset', datasets=val_list, pipeline=_base_.test_pipeline)
 
 train_dataloader = dict(
-    batch_size=64,
-    num_workers=12,
+    batch_size=128,
+    num_workers=24,
     persistent_workers=True,
-    pin_memory=True,
     sampler=dict(type='DefaultSampler', shuffle=True),
     dataset=train_dataset)
 
@@ -80,7 +90,6 @@ test_dataloader = dict(
     batch_size=128,
     num_workers=4,
     persistent_workers=True,
-    pin_memory=True,
     drop_last=False,
     sampler=dict(type='DefaultSampler', shuffle=False),
     dataset=test_dataset)
@@ -96,10 +105,6 @@ val_dataloader = dict(
 
 val_evaluator = dict(
     dataset_prefixes=['CUTE80', 'IIIT5K', 'SVT', 'SVTP', 'IC13', 'IC15'])
-
-test_evaluator = dict(
-    dataset_prefixes=['CUTE80', 'IIIT5K', 'SVT', 'SVTP', 'IC13', 'IC15'])
-
 test_evaluator = dict(dataset_prefixes=[
     'artistic', 'multi-oriented', 'contextless', 'curve', 'incomplete',
     'incomplete-ori', 'multi-words', 'salient', 'general'

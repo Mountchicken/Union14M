@@ -67,10 +67,11 @@
 
 ### 3.4. Download
 
-  | Datasets                        | Google Drive            | Baidu Netdisk     |
-  | ------------------------------- | ----------------------- | ----------------- |
-  | Union14M-L / Union14M-Benchmark | [Google Drive (8 GB)]() | [Baidu Netdisk]() |
-  | Union14M-U                      | [Google Drive (8 GB)]() | [Baidu Netdisk]() |
+  | Datasets                               | Google Drive            | Baidu Netdisk                                                             |
+  | -------------------------------------- | ----------------------- | ------------------------------------------------------------------------- |
+  | Union14M-L & Union14M-Benchmark (12GB) | [Google Drive (8 GB)]() | [Baidu Netdisk](https://pan.baidu.com/s/1WiXfg9YjKiO1SzBfT14mmg?pwd=anxs) |
+  | Union14M-U (36.63GB)                   | [Google Drive (8 GB)]() | [Baidu Netdisk]()                                                         |
+  | 6 Common Benchmarks (17.6MB)           | [Google Drive (8 GB)]() | [Baidu Netdisk](https://pan.baidu.com/s/1XifQS0v-0YxEXkGTfWMDWQ?pwd=35cz) |
 
 
 - The Structure of Union14M will be organized as follows:
@@ -108,25 +109,12 @@
   <details close>
   <summary><strong>Structure of Union14M-U</strong></summary>
 
+  We store images in LMDB format, and the structure of Union14M-U will be organized as belows. Here is an example of using [LMDB Example]()
   ```text
   |--Union14M-U
-    |--book32
-      |--
-    |--cc
-      |--cc
-        |--img1.jpg
-        |--...
-    |--openvino
-      |--test
-        |--img1.jpg
-        |--...
-      |--train_0
-        |--img1.jpg
-        |--...
-      |--train_3
-        |--img1.jpg
-        |--...
-      |--...
+    |--book32_lmdb
+    |--cc_lmdb
+    |--openvino_lmdb
   ```
   </details>
 
@@ -134,17 +122,15 @@
 - We train serval STR models on Union14M-L using [MMOCR-1.0](https://github.com/open-mmlab/mmocr/tree/dev-1.x)
 
 ### 4.1. Checkpoints
-- Evaluated on both common benchmarks and Union14M-Benchmark. Accuracy (WAICS) in $\color{grey}{grey}$ are original implementation, and accuracay in $\color{green}{green}$ are trained on Union14M-L. Our models are trained to predict **upper & lower text, symbols and space.**
+- Evaluated on both common benchmarks and Union14M-Benchmark. Accuracy (WAICS) in $\color{grey}{grey}$ are original implementation (Trained on synthtic datasest), and accuracay in $\color{green}{green}$ are trained on Union14M-L. Our models are trained to predict **upper & lower text, symbols and space.**
 
-  |         Models         |  Checkpoint  |                    IIIT5K                    |                     SVT                     |                     IC13-1015                     |                     IC15-2077                      |                     SVTP                     |                    CUTE80                    |                     Avg.                     |
-  | :--------------------: | :----------: | :------------------------------------------: | :------------------------------------------: | :------------------------------------------: | :------------------------------------------: | :------------------------------------------: | :------------------------------------------: | :------------------------------------------: |
-  |     [ASTER](#TODO)     | [Download]() | $\color{grey}{93.57}$ \ $\color{green}{94.37}$ | $\color{grey}{89.49}$ \ $\color{green}{89.03}$ | $\color{grey}{92.81}$ \ $\color{green}{93.60}$ | $\color{grey}{76.65}$ \ $\color{green}{78.57}$ | $\color{grey}{80.62}$ \ $\color{green}{80.93}$ | $\color{grey}{85.07}$ \ $\color{green}{90.97}$ | $\color{grey}{86.37}$ \ $\color{green}{88.07}$ |
-  |    [ABINet](#TODO)     | [Download]() | $\color{grey}{95.4}$ \ $\color{green}{95.4}$ | $\color{grey}{95.4}$ \ $\color{green}{95.4}$ | $\color{grey}{95.4}$ \ $\color{green}{95.4}$ | $\color{grey}{95.4}$ \ $\color{green}{95.4}$ | $\color{grey}{95.4}$ \ $\color{green}{95.4}$ | $\color{grey}{95.4}$ \ $\color{green}{95.4}$ | $\color{grey}{95.4}$ \ $\color{green}{95.4}$ |
-  |     [NRTR](#TODO)      | [Download]() | $\color{grey}{95.4}$ \ $\color{green}{95.4}$ | $\color{grey}{95.4}$ \ $\color{green}{95.4}$ | $\color{grey}{95.4}$ \ $\color{green}{95.4}$ | $\color{grey}{95.4}$ \ $\color{green}{95.4}$ | $\color{grey}{95.4}$ \ $\color{green}{95.4}$ | $\color{grey}{95.4}$ \ $\color{green}{95.4}$ | $\color{grey}{95.4}$ \ $\color{green}{95.4}$ |
-  |     [SATRN](#TODO)     | [Download]() | $\color{grey}{95.4}$ \ $\color{green}{95.4}$ | $\color{grey}{95.4}$ \ $\color{green}{95.4}$ | $\color{grey}{95.4}$ \ $\color{green}{95.4}$ | $\color{grey}{95.4}$ \ $\color{green}{95.4}$ | $\color{grey}{95.4}$ \ $\color{green}{95.4}$ | $\color{grey}{95.4}$ \ $\color{green}{95.4}$ | $\color{grey}{95.4}$ \ $\color{green}{95.4}$ |
-  |    [MASTER](#TODO)     | [Download]() | $\color{grey}{95.4}$ \ $\color{green}{95.4}$ | $\color{grey}{95.4}$ \ $\color{green}{95.4}$ | $\color{grey}{95.4}$ \ $\color{green}{95.4}$ | $\color{grey}{95.4}$ \ $\color{green}{95.4}$ | $\color{grey}{95.4}$ \ $\color{green}{95.4}$ | $\color{grey}{95.4}$ \ $\color{green}{95.4}$ | $\color{grey}{95.4}$ \ $\color{green}{95.4}$ |
-  | [RobustScanner](#TODO) | [Download]() | $\color{grey}{95.4}$ \ $\color{green}{95.4}$ | $\color{grey}{95.4}$ \ $\color{green}{95.4}$ | $\color{grey}{95.4}$ \ $\color{green}{95.4}$ | $\color{grey}{95.4}$ \ $\color{green}{95.4}$ | $\color{grey}{95.4}$ \ $\color{green}{95.4}$ | $\color{grey}{95.4}$ \ $\color{green}{95.4}$ | $\color{grey}{95.4}$ \ $\color{green}{95.4}$ |
-  |      [SAR](#TODO)      | [Download]() | $\color{grey}{95.4}$ \ $\color{green}{95.4}$ | $\color{grey}{95.4}$ \ $\color{green}{95.4}$ | $\color{grey}{95.4}$ \ $\color{green}{95.4}$ | $\color{grey}{95.4}$ \ $\color{green}{95.4}$ | $\color{grey}{95.4}$ \ $\color{green}{95.4}$ | $\color{grey}{95.4}$ \ $\color{green}{95.4}$ | $\color{grey}{95.4}$ \ $\color{green}{95.4}$ |
+  |                                          Models                                           |                                                                                Checkpoint                                                                                 |                     IIIT5K                     |                      SVT                       |                   IC13-1015                    |                   IC15-2077                    |                      SVTP                      |                     CUTE80                     |                      Avg.                      |
+  | :---------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :--------------------------------------------: | :--------------------------------------------: | :--------------------------------------------: | :--------------------------------------------: | :--------------------------------------------: | :--------------------------------------------: | :--------------------------------------------: |
+  |       [ASTER](mmocr-dev-1.x/configs/textrecog/aster/aster_resnet45_6e_union14m.py)        | [Google Drive](https://drive.google.com/file/d/1m1uIYYxaPuq2Rb_wffZM2TTdW8ul2gr-/view?usp=sharing) / [BaiduYun](https://pan.baidu.com/s/1vnrEgr1BaTtYs0CGU4PR8Q?pwd=urmt) | $\color{grey}{93.57}$ \ $\color{green}{94.37}$ | $\color{grey}{89.49}$ \ $\color{green}{89.03}$ | $\color{grey}{92.81}$ \ $\color{green}{93.60}$ | $\color{grey}{76.65}$ \ $\color{green}{78.57}$ | $\color{grey}{80.62}$ \ $\color{green}{80.93}$ | $\color{grey}{85.07}$ \ $\color{green}{90.97}$ | $\color{grey}{86.37}$ \ $\color{green}{88.07}$ |
+  |          [ABINet](mmocr-dev-1.x/configs/textrecog/abinet/abinet_10e_union14m.py)          | [Google Drive](https://drive.google.com/file/d/16zyF_7GgQdLlwYjeLgYBEmLI5_xBP5rn/view?usp=sharing) / [BaiduYun](https://pan.baidu.com/s/14fzeLOVqt7BVo-UYjYYyAQ?pwd=vnh6) | $\color{grey}{95.23}$ \ $\color{green}{97.30}$ | $\color{grey}{90.57}$ \ $\color{green}{96.45}$ | $\color{grey}{93.69}$ \ $\color{green}{95.52}$ | $\color{grey}{78.86}$ \ $\color{green}{85.36}$ | $\color{grey}{84.03}$ \ $\color{green}{89.77}$ | $\color{grey}{84.37}$ \ $\color{green}{94.79}$ | $\color{grey}{87.79}$ \ $\color{green}{93.20}$ |
+  |     [NRTR](mmocr-dev-1.x/configs/textrecog/nrtr/nrtr_resnet31-1by8-1by4_union14m.py)      | [Google Drive](https://drive.google.com/file/d/1pNCLWra0ACdM8TJJtM0VUeM_GyQQ2hSy/view?usp=sharing) / [BaiduYun](https://pan.baidu.com/s/1F0I3BF0H6gK47rsxNHrN_g?pwd=wcuc) | $\color{grey}{91.50}$ \ $\color{green}{96.73}$ | $\color{grey}{88.25}$ \ $\color{green}{93.20}$ | $\color{grey}{93.69}$ \ $\color{green}{95.57}$ | $\color{grey}{72.32}$ \ $\color{green}{80.74}$ | $\color{grey}{77.83}$ \ $\color{green}{83.57}$ | $\color{grey}{75.00}$ \ $\color{green}{92.01}$ | $\color{grey}{83.09}$ \ $\color{green}{90.30}$ |
+  |        [SATRN](mmocr-dev-1.x/configs/textrecog/satrn/satrn_shallow_5e_union14m.py)        | [Google Drive](https://drive.google.com/file/d/1mwzOgr-H9KNegeel-9qhnItxPdHbrr9T/view?usp=sharing) / [BaiduYun](https://pan.baidu.com/s/108JVqH9Q-on5psjVkZdBwQ?pwd=bc4d) | $\color{grey}{96.00}$ \ $\color{green}{97.27}$ | $\color{grey}{91.96}$ \ $\color{green}{95.36}$ | $\color{grey}{96.06}$ \ $\color{green}{96.85}$ | $\color{grey}{80.31}$ \ $\color{green}{87.14}$ | $\color{grey}{88.37}$ \ $\color{green}{90.39}$ | $\color{grey}{89.93}$ \ $\color{green}{96.18}$ | $\color{grey}{90.43}$ \ $\color{green}{93.89}$ |
+  | [SAR](mmocr-dev-1.x/configs/textrecog/sar/sar_resnet31_sequential-decoder_5e_union14m.py) | [Google Drive](https://drive.google.com/file/d/18gJxJAnokBVguI5W8FFU8yVZL0BlWXbM/view?usp=sharing) / [BaiduYun](https://pan.baidu.com/s/120iVZrXlJZf2Z8i_jITneQ?pwd=cpt2) | $\color{grey}{95.33}$ \ $\color{green}{97.07}$ | $\color{grey}{88.41}$ \ $\color{green}{93.66}$ | $\color{grey}{93.69}$ \ $\color{green}{95.76}$ | $\color{grey}{76.02}$ \ $\color{green}{82.19}$ | $\color{grey}{83.26}$ \ $\color{green}{86.98}$ | $\color{grey}{90.28}$ \ $\color{green}{92.01}$ | $\color{grey}{87.83}$ \ $\color{green}{91.27}$ |
 
 
 
@@ -171,19 +157,19 @@
 ### 5.1. Pre-training 
 - Pre-trained ViT
 
-  | Variants  | Input Size | Patch Size | Embedding | Depth | Heads | Parameters | Google Drive | Baidu Netdisk |
-  | --------- | ---------- | ---------- | --------- | ----- | ----- | ---------- | ------------ | ------------- |
-  | ViT-Small | 32x128     | 4x4        | 384       | 12    | 6     |            |              |               |
-  | ViT-Base  | 32x128     | 4x4        | 768       | 12    | 12    |            |              |               |
+  | Variants  | Input Size | Patch Size | Embedding | Depth | Heads | Parameters | Download                                                                                |
+  | --------- | ---------- | ---------- | --------- | ----- | ----- | ---------- | --------------------------------------------------------------------------------------- |
+  | ViT-Small | 32x128     | 4x4        | 384       | 12    | 6     |            | [Google Drive]() / [BaiduYun](https://pan.baidu.com/s/1nZL5veMyWhxpk8DGj0UZMw?pwd=xecv) |
+  | ViT-Base  | 32x128     | 4x4        | 768       | 12    | 12    |            | [Google Drive]() / [BaiduYun](https://pan.baidu.com/s/17CjAOV-1kf1__a2RBo9NUg?pwd=3rvx) |
 - If you want to pre-train the ViT backbone on your own dataset, check [pre-training](docs/pretrain.md)
 
 ### 5.2. Fine-tuning 
 - Fine-tuned MAERec
 
-  | Variants     | Acc on Common Benchmarks | Acc on Union14M-Benchmarks | Google Drive | Baidu Netdisk |
-  | ------------ | ------------------------ | -------------------------- | ------------ | ------------- |
-  | MAERec-Small | 95.1                     | 78.6                       |              |               |
-  | MAERec-Base  | 96.2                     | 85.2                       |              |               |
+  | Variants     | Acc on Common Benchmarks | Acc on Union14M-Benchmarks | Download                                                                                                                                                                  |
+  | ------------ | ------------------------ | -------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+  | MAERec-Small | 95.1                     | 78.6                       | [Google Drive](https://drive.google.com/file/d/1dKLS_r3_ysWK155pSmkm7NBf5ALsEJYd/view?usp=sharing) / [BaiduYun](https://pan.baidu.com/s/1wFhLQLrn9dm77TMpdxyNAg?pwd=trg4) |
+  | MAERec-Base  | 96.2                     | 85.2                       | [Google Drive](https://drive.google.com/file/d/13E0cmvksKwvjNuR62xZhwkg8eQJfb_Hp/view?usp=sharing) / [BaiduYun](https://pan.baidu.com/s/1EhoJ-2WqkzOQFCNg55-KcA?pwd=5yx1) |
 
 - If you want to fine-tune MAERec on your own dataset, check [fine-tuning](docs/finetune.md)
 
