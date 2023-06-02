@@ -1,7 +1,7 @@
 ## Fine-tuning MAERec
 We build MAERec with [MMOCR-1.0](https://github.com/open-mmlab/mmocr/tree/dev-1.x).
 
-### 1. Install
+### 1. Installation
 
 ```bash
 cd mmocr-dev-1.x

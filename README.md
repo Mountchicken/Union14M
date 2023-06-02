@@ -193,7 +193,7 @@
 - If you want to fine-tune MAERec on your own dataset, check [fine-tuning](docs/finetune.md)
 
 ### 5.3. Evaluation
-- If you want to evaluate MAERec on benchmarks, check [evaluation](docs/evaluation.md)
+- If you want to evaluate MAERec on benchmarks, check [evaluation](docs/finetune.md/#3-evaluate-maerec-on-union14m-benchmarks)
 
 ### 5.4. Inferencing
 - If you want to inferencing MAERec on your raw pictures, check [inferencing](docs/inferencing.md)
