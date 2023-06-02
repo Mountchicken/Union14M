@@ -52,7 +52,7 @@
     - [5.2. Fine-tuning](#52-fine-tuning)
     - [5.3. Evaluation](#53-evaluation)
     - [5.4. Inferencing](#54-inferencing)
-    - [5.4. ONNX Conversion](#54-onnx-conversion)
+    - [5.5. ONNX Export](#55-onnx-export)
   - [6. QAs](#6-qas)
   - [7. License](#7-license)
   - [8. Acknowledgement](#8-acknowledgement)
@@ -196,10 +196,10 @@
 - If you want to evaluate MAERec on benchmarks, check [evaluation](docs/finetune.md/#3-evaluate-maerec-on-union14m-benchmarks)
 
 ### 5.4. Inferencing
-- If you want to inferencing MAERec on your raw pictures, check [inferencing](docs/inferencing.md)
+- If you want to inferencing MAERec on your raw pictures, check [inferencing](docs/inference.md)
 
 
-### 5.4. ONNX Conversion
+### 5.5. ONNX Export
 
 ## 6. QAs
 

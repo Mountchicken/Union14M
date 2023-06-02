@@ -19,15 +19,14 @@ model = dict(
         num_heads=6,
         mlp_ratio=4.0,
         qkv_bias=True,
-        pretrained=  # noqa
-        '../mae/mae_pretrained/vit_small/vit_small_checkpoint-19.pth'),
+        pretrained=None),
     decoder=dict(
         type='MAERecDecoder',
         n_layers=6,
         d_embedding=384,
         n_head=8,
         d_model=384,
-        d_inner=384*4,
+        d_inner=384 * 4,
         d_k=48,
         d_v=48,
         postprocessor=dict(type='AttentionPostprocessor'),

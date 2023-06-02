@@ -17,8 +17,7 @@ model = dict(
         num_heads=12,
         mlp_ratio=4.0,
         qkv_bias=True,
-        pretrained='../mae/mae_pretrained/vit_base/vit_base_checkpoint-19.pth'
-    ),
+        pretrained=None),
     decoder=dict(
         type='MAERecDecoder',
         n_layers=6,
