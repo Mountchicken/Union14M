@@ -74,4 +74,8 @@ Note that when using norm_pix_loss, the reconstructed images are not the origina
     ```bash
     tensorboard --logdir=output_dir
     ```
+<div align=center>
+  <img src='https://github.com/open-mmlab/mmocr/assets/65173622/2cbc0f73-a1b1-441b-b000-c598138bb7e5' width=600 >
+</div>
+
 - The pre-training takes about 2 hours each epoch on 4 A6000 GPUs (48G).

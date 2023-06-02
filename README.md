@@ -4,7 +4,7 @@
 
 </div>
 <div align=center>
-  <img src='github/cover.png' width=600 >
+  <img src='https://github.com/open-mmlab/mmocr/assets/65173622/4544c4ff-0f30-46b2-ae04-7bd795694df4' width=600 >
 </div>
 <div align=center>
   <p >Union14M is a large scene text recognition (STR) dataset collected from 17 publicly available datasets, which contains 4M of labeled data (Union14M-L) and 10M of unlabeled data (Union14M-U), intended to provide a more profound analysis for the STR community</p>
@@ -30,8 +30,8 @@
 
 - Scene Text Recognition (STR) is a fundamental task in computer vision, which aims to recognize the text in natural images. STR has been developed rapidly in recent years, and recent state-of-the-arts have shown a trend of accuracy saturation on six commonly used benchmarks (IC13, IC15, SVT, IIIT5K, SVTP, CUTE80). This is a promissing result, but it also raises a question: **Are we done with STR?** Or it's just the lack of challenges in current benchmarks that cover the drawbacks of existing methods in read-world scenarios.
 <div align=center>
-  <img src='github/acc_trend.png' width=400 >
-  <img src='github/benchmark_analysis.png' width=400 >
+  <img src='https://github.com/open-mmlab/mmocr/assets/65173622/4ec60ac0-ca4e-4233-a196-8e9e46a0c21d' width=400 >
+  <img src='https://github.com/open-mmlab/mmocr/assets/65173622/2991aa45-01cc-44da-a62f-56fd16012ab2' width=400 >
 </div>
 
 - To explore the challenges that STR models still face, we consolidate a large-scale STR dataset for analysis and identified seven open challenges. Furthermore, we propose a challenge-driven benchmark to facilitate the future development of STR. Additionally, we reveal that the utilization of massive unlabeled data through self-supervised pre-training can remarkably enhance the performance of the STR model in real-world scenarios, suggesting a practical solution for STR from a data perspective. We hope this work can spark future research beyond the realm of existing data paradigms.
@@ -66,20 +66,20 @@
   - **De-duplicate**: Some datasets contains duplicate images, we remove them.
 - We also categorize the images in Union14M-L into five difficulty levels using an error voting method. 
 <div align=center>
-  <img src='github/union14m-l.png' width=700 >
+  <img src='https://github.com/open-mmlab/mmocr/assets/65173622/79c4b5a5-4a2f-46da-aeca-3d92e9199861' width=700 >
 </div>
 
 ### 3.2. Union14M-U
 - The optimal solution to improve the performance of STR in real-world scenarios is to utilize more data for training. However, labeling text images is both costly and time-intensive, given that it involves annotating sequences and needs specialized language expertise. Therefore, it would be desirable to investigate the potential of utilizing unlabeled data via self-supervised learning for STR. To this end we collect
 10M unlabeled images from 3 large datasets, using an IoU Voting method
 <div align=center>
-  <img src='github/union14m-u.png' width=600 >
+  <img src='https://github.com/open-mmlab/mmocr/assets/65173622/11711617-0fb0-42e0-a6ec-1938e2a71e61' width=600 >
 </div>
 
 ### 3.3. Union14M-Benchmark
 - We raise seven open challenges for STR in real-world scenarios, and propose a challenge-driven benchmark to facilitate the future development.
 <div align=center>
-  <img src='github/benchmark_image.png' width=600 >
+  <img src='https://github.com/open-mmlab/mmocr/assets/65173622/bcfdd369-decd-4b6f-903b-3021531bd119' width=600 >
 </div>
 
 ### 3.4. Download
@@ -156,19 +156,19 @@
 - MAERec is a scene text recognition model composed of a ViT backbone and a Transformer decoder in auto-regressive style. It shows an outstanding performance in scene text recognition, especially when pre-trained on the Union14M-U through MAE.
 
   <div align=center>
-    <img src='github/maerec.png' width=400 >
+    <img src='https://github.com/open-mmlab/mmocr/assets/65173622/f0ed4487-8064-452e-8657-b12e6f90792d' width=400 >
   </div>
 
 - Results of MAERec on six common benchmarks and Union14M-Benchmarks
 
   <div align=center>
-    <img src='github/sota.png' width=800 >
+    <img src='https://github.com/open-mmlab/mmocr/assets/65173622/e697ebe0-22e5-4998-ac0d-38e543c7b400' width=800 >
   </div>
 
 - Predictions of MAERec on some challenging examples
 
   <div align=center>
-    <img src='github/examples.png' width=800 >
+    <img src='https://github.com/open-mmlab/mmocr/assets/65173622/465f45b4-5f4e-4b08-962d-67f094f674e2' width=800 >
   </div>
 
 
@@ -220,7 +220,7 @@ or play with it on [HuggingFace Spaces](https://huggingface.co/spaces/akhaliq/ma
   ```
 
 <div align=center>
-  <img src='github/gradio3.png' width=600 >
+  <img src='https://github.com/open-mmlab/mmocr/assets/65173622/9e6e041f-075a-416d-9996-07fb3ffed11d' width=600 >
 </div>
 
 ## 6. QAs
