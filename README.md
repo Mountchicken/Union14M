@@ -1,11 +1,13 @@
-<div align=center
+<div align=center>
 
 # Rethinking Scene Text Recognition: A Data Perspective
 
 </div>
+
 <div align=center>
   <img src='https://github.com/open-mmlab/mmocr/assets/65173622/4544c4ff-0f30-46b2-ae04-7bd795694df4' width=600 >
 </div>
+
 <div align=center>
   <p >Union14M is a large scene text recognition (STR) dataset collected from 17 publicly available datasets, which contains 4M of labeled data (Union14M-L) and 10M of unlabeled data (Union14M-U), intended to provide a more profound analysis for the STR community</p>
 
@@ -21,8 +23,7 @@
 <p align="center">
    <strong><a href="#1-introduction">Introduction </a></strong> •
    <strong><a href="#34-download">Download </a></strong> •
-   <strong><a href="#5-maerec">MAERec</a></strong> •
-   <strong><a href="#6-qas">QAs</a></strong>
+   <strong><a href="#5-maerec">MAERec</a></strong>
    
 </p>
 
@@ -52,12 +53,10 @@
     - [5.2. Fine-tuning](#52-fine-tuning)
     - [5.3. Evaluation](#53-evaluation)
     - [5.4. Inferencing](#54-inferencing)
-    - [5.5. ONNX Export](#55-onnx-export)
-    - [5.6. Gradio APP](#56-gradio-app)
-  - [6. QAs](#6-qas)
-  - [7. License](#7-license)
-  - [8. Acknowledgement](#8-acknowledgement)
-  - [9. Citation](#9-citation)
+    - [5.5. Demo](#55-demo)
+  - [6. License](#6-license)
+  - [7. Acknowledgement](#7-acknowledgement)
+  - [8. Citation](#8-citation)
 
 ## 3. Union14M Dataset
 ### 3.1. Union14M-L
@@ -181,7 +180,6 @@
   | ViT-B    | 32x128     | 4x4        | 768       | 12    | 12    | 85M        | [GoogleDrive](https://drive.google.com/file/d/1OSGZ7Jt7q4Pj3M9cUQznJpRDSDjzBVuy/view?usp=sharing) / [BaiduYun](https://pan.baidu.com/s/17CjAOV-1kf1__a2RBo9NUg?pwd=3rvx) / [OneDrive](https://1drv.ms/u/s!AotJrudtBr-K7w2_fx4HF57MGQ6L?e=1NTxee) |
 - If you want to pre-train the ViT backbone on your own dataset, check [pre-training](docs/pretrain.md)
 
-<!-- TODO: Add Google Drive Link -->
 
 ### 5.2. Fine-tuning 
 - MAERec finetuned on Union14M-L
@@ -199,38 +197,40 @@
 ### 5.4. Inferencing
 - If you want to inferencing MAERec on your raw pictures, check [inferencing](docs/inference.md)
 
-
-### 5.5. ONNX Export
-
-
-### 5.6. Gradio APP
-- We also provide a Gradio APP for MAERec, which can be used to inferencing on your own pictures. You can run it locally
-or play with it on [HuggingFace Spaces](https://huggingface.co/spaces/akhaliq/maerec-gradio-app).
+### 5.5. Demo
+- We also provide a Gradio APP for MAERec, which can be used to inferencing on your own pictures. You can run it locally or play with it on [🤗HuggingFace Spaces](https://huggingface.co/spaces/akhaliq/maerec-gradio-app).
 - To run it locally, you can run the following command:
-  ```bash
-  pip install gradio
-  # download weight for MAERec
-  # download weight for DBNet++
-  wget https://download.openmmlab.com/mmocr/textdet/dbnetpp/dbnetpp_resnet50-oclip_fpnc_1200e_icdar2015/dbnetpp_resnet50-oclip_fpnc_1200e_icdar2015_20221101_124139-4ecb39ac.pth -O dbnetpp
-  python tools/gradio_app.py \
-    --rec_config mmocr-dev-1.x/configs/textrecog/maerec/maerec_b_union14m.py \
-    --rec_weight ${PATH_TO_MAEREC_B} \
-    --det_config mmocr-dev-1.x/configs/textdet/dbnetpp/dbnetpp_resnet50-oclip_fpnc_1200e_icdar2015.py \
-    --det_weight ${PATH_TO_DBNETPP} \
-  ```
+  - 1. Install gradio
+    ```bash
+    pip install gradio
+    ```
+  - 2. Download the weights for [MAERec](#52-fine-tuning)
+  - 3. Download the weight for DBNet++
+    ```bash
+    wget https://download.openmmlab.com/mmocr/textdet/dbnetpp/dbnetpp_resnet50-oclip_fpnc_1200e_icdar2015/dbnetpp_resnet50-oclip_fpnc_1200e_icdar2015_20221101_124139-4ecb39ac.pth -O dbnetpp
+    ```
+  - 4. Run the gradio app
+    ```bash
+    python tools/gradio_app.py \
+      --rec_config mmocr-dev-1.x/configs/textrecog/maerec/maerec_b_union14m.py \
+      --rec_weight ${PATH_TO_MAEREC_B} \
+      --det_config mmocr-dev-1.x/configs/textdet/dbnetpp/dbnetpp_resnet50-oclip_fpnc_1200e_icdar2015.py \
+      --det_weight ${PATH_TO_DBNETPP} \
+    ```
 
 <div align=center>
-  <img src='https://github.com/open-mmlab/mmocr/assets/65173622/9e6e041f-075a-416d-9996-07fb3ffed11d' width=600 >
+  <img src='https://github.com/open-mmlab/mmocr/assets/65173622/829741e1-ca5c-4be7-9a25-ce14da4f9d50' width=600 >
 </div>
 
-## 6. QAs
-
-
-## 7. License
+## 6. License
 - The repository is released under the [MIT license](LICENSE).
 
-## 8. Acknowledgement
+## 7. Acknowledgement
 - We sincerely thank all the constructors of the 17 datasets used in Union14M, and also the developers of MMOCR, which is a powerful toolbox for OCR research.
 
-## 9. Citation
+## 8. Citation
 
+
+
+
+http://gofile.me/78ddm/vIf5YG74w
