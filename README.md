@@ -230,7 +230,6 @@
 
 ## 8. Citation
 
-
-
-
-http://gofile.me/78ddm/vIf5YG74w
+<!-- TODO: Update Google Colab
+TODO: Update Arxiv Links
+TODO: Update Arxiv Link in Gradio -->
