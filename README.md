@@ -13,7 +13,7 @@
 
 <div align=center>
 
-[![arXiv preprint](http://img.shields.io/badge/arXiv-2207.06966-b31b1b)](https://arxiv.org/abs/2207.06966) [![Gradio demo](https://img.shields.io/badge/%F0%9F%A4%97%20demo-Gradio-ff7c00)](https://huggingface.co/spaces/baudm/PARSeq-OCR) [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/10Fd5x7ywL_ps4m2Am7DmvvcAflWIKCTW?usp=sharing)     
+[![arXiv preprint](http://img.shields.io/badge/arXiv-2207.06966-b31b1b)](https://arxiv.org/abs/2207.06966) [![Gradio demo](https://img.shields.io/badge/%F0%9F%A4%97%20demo-Gradio-ff7c00)](https://huggingface.co/spaces/Mountchicken/MAERec-Gradio) [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/10Fd5x7ywL_ps4m2Am7DmvvcAflWIKCTW?usp=sharing)     
 
 
 </div>
@@ -70,7 +70,7 @@
 
 ### 3.2. Union14M-U
 - The optimal solution to improve the performance of STR in real-world scenarios is to utilize more data for training. However, labeling text images is both costly and time-intensive, given that it involves annotating sequences and needs specialized language expertise. Therefore, it would be desirable to investigate the potential of utilizing unlabeled data via self-supervised learning for STR. To this end we collect
-10M unlabeled images from 3 large datasets, using an IoU Voting method
+10M unlabeled images from 3 large datasets with an IoU Voting method
 <div align=center>
   <img src='https://github.com/open-mmlab/mmocr/assets/65173622/11711617-0fb0-42e0-a6ec-1938e2a71e61' width=600 >
 </div>
@@ -83,7 +83,7 @@
 
 ### 3.4. Download
 
-  | Datasets                               | Google Drive                                                           | Baidu Yun                                                             |
+  | Datasets                               | One Drive                                                              | Baidu Yun                                                             |
   | -------------------------------------- | ---------------------------------------------------------------------- | --------------------------------------------------------------------- |
   | Union14M-L & Union14M-Benchmark (12GB) | [One Drive](https://1drv.ms/u/s!AotJrudtBr-K7xAHjmr5qlHSr5Pa?e=LJRlKQ) | [Baidu Yun](https://pan.baidu.com/s/1WiXfg9YjKiO1SzBfT14mmg?pwd=anxs) |
   | Union14M-U (36.63GB)                   | [One Drive](https://1drv.ms/f/s!AotJrudtBr-K7xGbC7wFSU62-R9m?e=ywgQAx) | [Baidu Yun](https://pan.baidu.com/s/1yOUCYgjwSB8czmZyyX56PA?pwd=4c9v) |
@@ -126,7 +126,7 @@
   <details close>
   <summary><strong>Structure of Union14M-U</strong></summary>
 
-  We store images in [LMDB](https://github.com/Mountchicken/Efficient-Deep-Learning/blob/main/Efficient_DataProcessing.md#21-efficient-data-storage-methods) format, and the structure of Union14M-U will be organized as belows. Here is an example of using [LMDB Example]()
+  We store images in [LMDB](https://github.com/Mountchicken/Efficient-Deep-Learning/blob/main/Efficient_DataProcessing.md#21-efficient-data-storage-methods) format, and the structure of Union14M-U will be organized as belows.
   ```text
   |--Union14M-U
     |--book32_lmdb
@@ -198,7 +198,7 @@
 - If you want to inferencing MAERec on your raw pictures, check [inferencing](docs/inference.md)
 
 ### 5.5. Demo
-- We also provide a Gradio APP for MAERec, which can be used to inferencing on your own pictures. You can run it locally or play with it on [🤗HuggingFace Spaces](https://huggingface.co/spaces/akhaliq/maerec-gradio-app).
+- We also provide a Gradio APP for MAERec, which can be used to inferencing on your own pictures. You can run it locally or play with it on [🤗HuggingFace Spaces](https://huggingface.co/spaces/Mountchicken/MAERec-Gradio).
 - To run it locally, you can run the following command:
   - 1. Install gradio
     ```bash

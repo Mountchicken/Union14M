@@ -11,3 +11,4 @@ add_data/
 mmocr-0.x/
 mae/output_dir
 *.pyc
+MAERec-Gradio
