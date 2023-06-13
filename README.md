@@ -200,14 +200,11 @@
 ### 5.5. Demo
 - We also provide a Gradio APP for MAERec, which can be used to inferencing on your own pictures. You can run it locally or play with it on [🤗HuggingFace Spaces](https://huggingface.co/spaces/Mountchicken/MAERec-Gradio).
 - To run it locally, you can run the following command:
-  - 1. Install gradio
+  - 1. Install gradio and download the pretrained weights
     ```bash
     pip install gradio
-    ```
-  - 2. Download the weights for [MAERec](#52-fine-tuning)
-  - 3. Download the weight for DBNet++
-    ```bash
-    wget https://download.openmmlab.com/mmocr/textdet/dbnetpp/dbnetpp_resnet50-oclip_fpnc_1200e_icdar2015/dbnetpp_resnet50-oclip_fpnc_1200e_icdar2015_20221101_124139-4ecb39ac.pth -O dbnetpp
+    wget https://download.openmmlab.com/mmocr/textdet/dbnetpp/dbnetpp_resnet50-oclip_fpnc_1200e_icdar2015/dbnetpp_resnet50-oclip_fpnc_1200e_icdar2015_20221101_124139-4ecb39ac.pth -O dbnetpp.pth
+    wget https://github.com/Mountchicken/Union14M/releases/download/Checkpoint/maerec_b_union14m.pth -O maerec_b.pth
     ```
   - 4. Run the gradio app
     ```bash
