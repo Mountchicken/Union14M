@@ -13,7 +13,8 @@
 
 <div align=center>
 
-[![Gradio demo](https://img.shields.io/badge/%F0%9F%A4%97%20demo-Gradio-ff7c00)](https://huggingface.co/spaces/Mountchicken/MAERec-Gradio) [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/10Fd5x7ywL_ps4m2Am7DmvvcAflWIKCTW?usp=sharing)     
+[![Gradio demo](https://img.shields.io/badge/%F0%9F%A4%97%20demo-Gradio-ff7c00)](https://huggingface.co/spaces/Mountchicken/MAERec-Gradio)
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/10Fd5x7ywL_ps4m2Am7DmvvcAflWIKCTW?usp=sharing)     
 
 
 </div>
