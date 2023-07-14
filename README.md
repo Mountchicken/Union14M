@@ -27,7 +27,8 @@
    
 </p>
 
-**Official paper will be released by next monday when arViv is ready. For now, you can check the  unofficial version [here](https://github.com/union14m/union14m.github.io/blob/main/material/Revisiting_Scene_Text_Recognition__A_Data_Perspective__arXiv_.pdf)**
+- **Official paper will be released by next monday when arViv is ready. For now, you can check the  unofficial version [here](https://github.com/union14m/union14m.github.io/blob/main/material/Revisiting_Scene_Text_Recognition__A_Data_Perspective__arXiv_.pdf)**
+- **Web page**: [https://union14m.github.io/](https://union14m.github.io/)
 
 ## 1. Introduction
 
