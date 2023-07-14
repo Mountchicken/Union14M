@@ -28,12 +28,12 @@
    
 </p>
 
-- **Official paper will be released by next monday when arViv is ready. For now, you can check the  unofficial version [here](https://github.com/union14m/union14m.github.io/blob/main/material/Revisiting_Scene_Text_Recognition__A_Data_Perspective__arXiv_.pdf)**
+- **Official paper will be released by next Monday when arXiv is ready. For now, you can check the  unofficial version [here](https://github.com/union14m/union14m.github.io/blob/main/material/Revisiting_Scene_Text_Recognition__A_Data_Perspective__arXiv_.pdf)**
 - **Web page**: [https://union14m.github.io/](https://union14m.github.io/)
 
 ## 1. Introduction
 
-- Scene Text Recognition (STR) is a fundamental task in computer vision, which aims to recognize the text in natural images. STR has been developed rapidly in recent years, and recent state-of-the-arts have shown a trend of accuracy saturation on six commonly used benchmarks (IC13, IC15, SVT, IIIT5K, SVTP, CUTE80). This is a promissing result, but it also raises a question: **Are we done with STR?** Or it's just the lack of challenges in current benchmarks that cover the drawbacks of existing methods in read-world scenarios.
+- Scene Text Recognition (STR) is a fundamental task in computer vision, which aims to recognize the text in natural images. STR has been developed rapidly in recent years, and recent state-of-the-arts have shown a trend of accuracy saturation on six commonly used benchmarks (IC13, IC15, SVT, IIIT5K, SVTP, CUTE80). This is a promising result, but it also raises a question: **Are we done with STR?** Or it's just the lack of challenges in current benchmarks that cover the drawbacks of existing methods in read-world scenarios.
 <div align=center>
   <img src='https://github.com/open-mmlab/mmocr/assets/65173622/4ec60ac0-ca4e-4233-a196-8e9e46a0c21d' width=400 >
   <img src='https://github.com/open-mmlab/mmocr/assets/65173622/2991aa45-01cc-44da-a62f-56fd16012ab2' width=400 >
