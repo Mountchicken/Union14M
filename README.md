@@ -28,7 +28,7 @@
    
 </p>
 
-- **Official paper will be released by next Monday when arXiv is ready. For now, you can check the  unofficial version [here](https://github.com/union14m/union14m.github.io/blob/main/material/Revisiting_Scene_Text_Recognition__A_Data_Perspective__arXiv_.pdf)**
+- **Paper will be released by this week**
 - **Web page**: [https://union14m.github.io/](https://union14m.github.io/)
 
 ## 1. Introduction
@@ -227,7 +227,7 @@
 - The repository is released under the [MIT license](LICENSE).
 
 ## 7. Acknowledgement
-- We sincerely thank all the constructors of the 17 datasets used in Union14M, and also the developers of MMOCR, which is a powerful toolbox for OCR research.
+- We sincerely thank all the constructors of the 17 datasets used in Union14M, and also the developers of MMOCR.
 
 ## 8. Citation
 
