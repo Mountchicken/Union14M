@@ -229,11 +229,13 @@
 ## 8. Citation
 
 ```text
-@article{jiang2023revisiting,
-      title = {{Revisiting Scene Text Recognition: A Data Perspective},
-      author = {Jiang, Qing and Wang, Jiapeng and Peng, Dezhi and Liu, Chongyu and Jin, Lianwen},
-      booktitle={Proceedings of the IEEE/CVF International Conference on Computer Vision (ICCV)},
-      year={2023}
-      }
+@misc{jiang2023revisiting,
+      title={Revisiting Scene Text Recognition: A Data Perspective}, 
+      author={Qing Jiang and Jiapeng Wang and Dezhi Peng and Chongyu Liu and Lianwen Jin},
+      year={2023},
+      eprint={2307.08723},
+      archivePrefix={arXiv},
+      primaryClass={cs.CV}
+}
 
 ```
