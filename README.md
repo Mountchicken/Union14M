@@ -13,8 +13,7 @@
 
 <div align=center>
 
-[![Gradio demo](https://img.shields.io/badge/%F0%9F%A4%97%20demo-Gradio-ff7c00)](https://huggingface.co/spaces/Mountchicken/MAERec-Gradio)
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/10Fd5x7ywL_ps4m2Am7DmvvcAflWIKCTW?usp=sharing)     
+[![arXiv preprint](http://img.shields.io/badge/arXiv-2037.08723-b31b1b)](https://arxiv.org/pdf/2307.08723) [![Gradio demo](https://img.shields.io/badge/%F0%9F%A4%97%20demo-Gradio-ff7c00)](https://huggingface.co/spaces/Mountchicken/MAERec-Gradio) [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/10Fd5x7ywL_ps4m2Am7DmvvcAflWIKCTW?usp=sharing)     
 
 
 </div>
@@ -28,8 +27,6 @@
    
 </p>
 
-- **Paper will be released by this week**
-- **Web page**: [https://union14m.github.io/](https://union14m.github.io/)
 
 ## 1. Introduction
 
@@ -231,6 +228,12 @@
 
 ## 8. Citation
 
-<!-- TODO: Update Google Colab
-TODO: Update Arxiv Links
-TODO: Update Arxiv Link in Gradio -->
+```text
+@article{jiang2023revisiting,
+      title = {{Revisiting Scene Text Recognition: A Data Perspective},
+      author = {Jiang, Qing and Wang, Jiapeng and Peng, Dezhi and Liu, Chongyu and Jin, Lianwen},
+      booktitle={Proceedings of the IEEE/CVF International Conference on Computer Vision (ICCV)},
+      year={2023}
+      }
+
+```
