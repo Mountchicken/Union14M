@@ -27,6 +27,11 @@
    
 </p>
 
+## What's New
+- **2023/7/20**: Both MAERec and Union14M will be migrated to official MMOCR repo soon.
+- **2023/7/19**: We post a Zhihu blog for this work [ICCV2023 | 场景文字识别的新玩法：从数据角度重新审视场景文字](https://zhuanlan.zhihu.com/p/644548506)
+- **2023/7/15**: Our work is accepted by ICCV2023🥳
+
 
 ## 1. Introduction
 
@@ -40,6 +45,7 @@
 
 ## 2. Contents
 - [Rethinking Scene Text Recognition: A Data Perspective](#rethinking-scene-text-recognition-a-data-perspective)
+  - [What's New](#whats-new)
   - [1. Introduction](#1-introduction)
   - [2. Contents](#2-contents)
   - [3. Union14M Dataset](#3-union14m-dataset)
