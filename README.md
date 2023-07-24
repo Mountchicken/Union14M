@@ -1,6 +1,6 @@
 <div align=center>
 
-# Rethinking Scene Text Recognition: A Data Perspective
+# Revisiting Scene Text Recognition: A Data Perspective
 
 </div>
 
