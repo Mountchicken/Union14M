@@ -3,7 +3,7 @@ optim_wrapper = dict(
     type='OptimWrapper',
     optimizer=dict(
         type='AdamW',
-        lr=4e-4,
+        lr=1e-4,
         betas=(0.9, 0.999),
         eps=1e-08,
         weight_decay=0.01))
@@ -16,6 +16,6 @@ param_scheduler = [
     dict(
         type='CosineAnnealingLR',
         T_max=10,
-        eta_min=4e-6,
+        eta_min=1e-8,
         convert_to_iter_based=True)
 ]
