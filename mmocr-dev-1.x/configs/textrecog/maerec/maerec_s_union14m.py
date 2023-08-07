@@ -10,7 +10,7 @@ _base_ = [
     '../_base_/datasets/icdar2013.py',
     '../_base_/datasets/icdar2015.py',
     '../_base_/default_runtime.py',
-    '../_base_/schedules/schedule_adamw_cos_10e.py',
+    '../_base_/schedules/schedule_adamw_cos_6e.py',
 ]
 
 # dataset settings
