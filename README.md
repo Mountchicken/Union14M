@@ -229,19 +229,17 @@
 ## 6. License
 - The repository is released under the [MIT license](LICENSE).
 
-## 7. Acknowledgement
+## 7. Acknowledgment
 - We sincerely thank all the constructors of the 17 datasets used in Union14M, and also the developers of MMOCR.
 
 ## 8. Citation
 
 ```text
-@misc{jiang2023revisiting,
+@inproceedings{jiang2023revisiting,
       title={Revisiting Scene Text Recognition: A Data Perspective}, 
-      author={Qing Jiang and Jiapeng Wang and Dezhi Peng and Chongyu Liu and Lianwen Jin},
+      author={Qing Jiang and Jiapeng Wang and Dezhi Peng and Chongyu Liu and Lianwen Jin}
+      booktitle={Proceedings of the IEEE/CVF international conference on computer vision},
       year={2023},
-      eprint={2307.08723},
-      archivePrefix={arXiv},
-      primaryClass={cs.CV}
 }
 
 ```
