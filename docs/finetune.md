@@ -41,9 +41,8 @@ pip install -v -e .
     # evaluation with single GPU
     python tools/test.py configs/textrecog/maerec/maerec_b_union14m.py \
         {PATH TO PRETRAINED MAEREC} \
-        --eval acc
     # evaluation with multiple GPUs (8 GPUs in this example)
     bash tools/dist_test.sh configs/textrecog/maerec/maerec_b_union14m.py \
         {PATH TO PRETRAINED MAEREC} \
-        8 --eval acc
+        8 \
     ```
