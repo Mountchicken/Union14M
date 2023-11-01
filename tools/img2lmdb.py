@@ -87,7 +87,7 @@ def createDataset(rootPath, annoPath, outputPath, checkValid=True):
 
 
 if __name__ == '__main__':
-    imagePath = '/media/jiangqing/jqssd/projects/research/DGDataset/Union14M/data/Union14M-L/'
-    annoPath = '/media/jiangqing/jqssd/projects/research/DGDataset/Union14M/data/Union14M-L/Union14M-Benchmarks/general/annotation.jsonl'
-    outputPath = '/media/jiangqing/jqssd/projects/research/DGDataset/Union14M/data/Union14M-L/Union14M-Benchmarks/lmdb_format/general'
+    imagePath = 'Union14M-L/full_images'
+    annoPath = 'Union14M-L/train_annos/mmocr-0.x/train_challenging.jsonl'
+    outputPath = 'Union14M-L/lmdb_format/training/challenging'
     createDataset(imagePath, annoPath, outputPath)
